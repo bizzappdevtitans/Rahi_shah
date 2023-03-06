@@ -5,12 +5,13 @@ from odoo.exceptions import ValidationError
 class SchoolResult(models.Model):
     _name = "student.result"
     _description = "School Module"
+    _rec_name = "name_id"
 
     result_sequence = fields.Char(
         "Student sequence", required=True, index=True, copy=False, default="New"
     )
-    name = fields.Many2one("school.student", "student Name")
-    Email = fields.Char(related="name.Email", string="Student Mail")
+    name_id = fields.Many2one("school.student", "student Name")
+    Email = fields.Char(related="name_id.Email", string="Student Mail")
     roll = fields.Integer(String="RollNumber")
     Eco = fields.Integer(string="Economic")
     ba = fields.Integer(string="business administration")
@@ -25,6 +26,8 @@ class SchoolResult(models.Model):
             ("fail", "FAIL"),
         ]
     )
+
+    # To caluclate the total marks and percentage
 
     @api.depends("Eco", "ba", "acc", "state", "Gujrati")
     def cal_marks(self):
@@ -43,9 +46,12 @@ class SchoolResult(models.Model):
                 }
             )
 
+    # the Roll Number must be unique
     _sql_constraints = [
         ("roll_unique", "unique(roll)", "Roll number Must be  is unique..."),
     ]
+
+    # apply thr API Constraints for Marks is not greater than 100
 
     @api.constrains("Eco", "ba", "acc", "state", "Gujrati")
     def _check_date(self):
@@ -69,7 +75,3 @@ class SchoolResult(models.Model):
             )
             res = super(SchoolResult, self).create(vals)
         return res
-
-
-
-

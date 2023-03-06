@@ -21,6 +21,12 @@
 				<xpath expr="//field[@name='invoice_desc']" position="after">
 					<field name="project_desc"/>		
 				</xpath> 
+				<xpath expr="//field[@name='project_desc']" position="after">
+					<field name="purchase_desc"/>		
+				</xpath>
+				<xpath expr="//field[@name='purchase_desc']" position="after">
+					<field name="Manufacturing_desc"/>		
+				</xpath>
 				 <xpath expr="//notebook/page/field[@name='order_line'] /tree/field[@name='product_id']" position="after">
 					<field name="order_lines"/>
 				</xpath>
@@ -77,6 +83,28 @@
 				</field>
 			</record>
 
+		<record id="purchase_view_inherit" model="ir.ui.view">
+			<field name="name">purchase.order.view.inherit.custom</field>
+			<field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='currency_id']" position="after">
+					<field name="purchase_desc"/>		
+				</xpath>
+
+				</field>
+			</record>
+
+		<record id="manufacturing_view_inherit" model="ir.ui.view">
+			<field name="name">manufacturing.order.view.inherit.custom</field>
+			<field name="model">mrp.production</field>
+			<field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='company_id']" position="after">
+					<field name="Manufacturing_desc"/>		
+				</xpath>
+				</field>
+			</record>
 
 
 

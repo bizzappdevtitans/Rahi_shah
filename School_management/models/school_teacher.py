@@ -10,7 +10,7 @@ class SchoolTeacher(models.Model):
     lname = fields.Char(string="last Name")
     phone = fields.Char(string="Contact")
     photo = fields.Binary(string="Upload photo")
-    timetable = fields.One2many("school.timetable", "name_id", string="Timetable")
+    timetable_ids = fields.One2many("school.timetable", "name_id", string="Timetable")
     refernce = fields.Reference(
         selection=[
             ("school.student", "Student profile"),
@@ -18,7 +18,7 @@ class SchoolTeacher(models.Model):
         ],
         string="Student Details",
     )
-
+    #apply thr API Constraints for Phone number length
     @api.constrains("phone")
     def phone_validation(self):
         for record in self:
@@ -32,9 +32,3 @@ class SchoolTeacher(models.Model):
         for rec in self:
             result.append((rec.id, "%s %s" % (rec.name, rec.lname)))
         return result
-
-    # browse ORM Method
-    def action_browse(self):
-        for rec in self:
-            teacher = self.env["school.teacher"].browse(9)
-            print(teacher.name)

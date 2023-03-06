@@ -161,6 +161,8 @@
                         </button>
                         <field string="Result" name="result_count" widget="statinfo" />
                     </header>
+
+              
                 <group string="Student">
                     <group>
                     <field name="name" />
@@ -177,7 +179,7 @@
                     <field name="photo" widget="image" width="90px"/>
                 </group>
                 <group>
-                    <field name="result_list"/>
+                    <field name="result_list_ids"/>
                 </group>
                 </group>
                  <notebook>
@@ -214,10 +216,7 @@
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">
-                              <!--   <div class="o_kanban_image">
-                                    <img t-att-src="kanban_image('school.teacher','photo',record.id.raw_value)"/>
-
-                                </div> -->
+                          
                            
 
                        <div class="oe_kanban_details">
@@ -299,14 +298,17 @@
           <form>
             <sheet>
                 <group string="Teacher">
+                     <header>
+                    <button name="%(School_management.action_view_teacher_wizard)d" title="Create Wizard" type="action"
+                            string="Create Wizard"/>
+                    </header>
                     <field name="name"/>
                     <field name="lname"/> 
                     <field name="phone"/>
                     <field name="photo" widget="image" width="100px" height="50px"/>
-                    <field name="timetable"/> 
+                    <field name="timetable_ids"/> 
                     <field name="refernce"/>
-                </group>
-                         <button name="action_browse" string="Browse" type="object" style="background:lightblue" width="80px" /> 
+                </group> 
             </sheet>
         </form>
     </field>
@@ -354,10 +356,7 @@
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">
-                              <!--   <div class="o_kanban_image">
-                                    <img t-att-src="kanban_image('school.teacher','photo',record.id.raw_value)"/>
-
-                                </div> -->
+                             
                            
 
                        <div class="oe_kanban_details">
@@ -407,8 +406,13 @@
             <widget name="web_ribbon" text="submit" bg_color="bg-success" />
           
           <form>
+        
             <sheet>
                 <group string="Assignmnet">
+                        <header>
+                    <button name="%(School_management.action_view_demo_wizard)d" title="Create Wizard" type="action"
+                            string="Create Wizard"/>
+                    </header>
                     <field name="standard"/>
                     <field name="subject"/>
                     <field name="task"/>
@@ -451,10 +455,7 @@
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_global_click">
-                              <!--   <div class="o_kanban_image">
-                                    <img t-att-src="kanban_image('school.teacher','photo',record.id.raw_value)"/>
-
-                                </div> -->
+                             
                            
 
                        <div class="oe_kanban_details">
@@ -488,7 +489,7 @@
           <form>
             <sheet>
                 <group string="Leave">
-                    <field name="name"/>
+                    <field name="name_id"/>
                     <field name="reason"/>
                     <field name="date"/>
                     <field name="mode" widget="radio" />
@@ -510,7 +511,7 @@
 
           <tree>
          
-                    <field name="name"/>
+                    <field name="name_id"/>
                     <field name="date"/>
              
         </tree>
@@ -537,9 +538,9 @@
     <field name="name">school.leave.calendar</field>
     <field name="model">school.leave</field>
     <field name="arch" type="xml">
-        <calendar date_start="date" string="Leave" mode="month" color="name" event_limit="5"
+        <calendar date_start="date" string="Leave" mode="month" color="name_id" event_limit="5"
                  hide_time="true" js_class="project_calendar" event_open_popup="true" quick_add="false">
-                <field name="name"/>
+                    <field name="name_id"/>
                     <field name="reason"/>
                     <field name="date"/>
                     <field name="mode" widget="radio" />
@@ -564,11 +565,11 @@
             </header>
             <sheet>
                 <group string="Submission">
-                    <field name="name"/>
+                    <field name="name_id"/>
                     <field name="stu_stand"/>
                     <field name="assi_sub"/>
                     <field name="sub"  widget="file"/>
-                    <field name="assignment_details"/>
+                    <field name="assignment_details_ids"/>
                 </group>
                 <notebook>
                     <page string="description">
@@ -590,7 +591,7 @@
 
 
           <tree>
-                    <field name="name"/>
+                    <field name="name_id"/>
                     <field name="stu_stand"/>
                     <field name="assi_sub"/>
                     <field name="state"/>
@@ -604,7 +605,7 @@
     <field name="model">school.submit</field>
     <field name="arch" type="xml">
         <graph>
-            <field name="name"/>
+            <field name="name_id"/>
             <field name="stu_stand"/>
             <field name="assi_sub"/>
         </graph>
@@ -706,7 +707,7 @@
                 </div>
                 <group string="Result"> 
                  
-                    <field name="name"/>
+                    <field name="name_id"/>
                     <field name="Email" widget="email"/>
                     <field name="roll"/>
                     <field name="Eco"/>
@@ -732,7 +733,7 @@
             <field name="model">student.result</field>
             <field name="arch" type="xml">
                 <tree string="Result">
-                    <field name="name"/>
+                    <field name="name_id"/>
                     <field name="Email" widget="email"/>
                     <field name="roll"/>
                     <field name="percentage" widget="percentage"/>
@@ -749,7 +750,7 @@
             <field name="model">student.result</field>
             <field name="arch" type="xml">
                 <graph string="Result">
-                    <field name="name"/>
+                    <field name="name_id"/>
                     <field name="Email" widget="email"/>
                     <field name="roll"/>
                     <field name="Eco"/>
@@ -829,6 +830,7 @@
 </record>
 
 <!-- Admission Form -->
+
  <record id="school_Admission_form" model="ir.ui.view">
             <field name="name">school.admission.form</field>
             <field name="model">school.admission</field>
@@ -845,8 +847,9 @@
             
                
             <group string="Admission Form">
-            <!-- <group string="Admission Form"> -->
+        
                 <group string="School Information">
+                    <field name="admission_id"/>
                     <field name="sch_name"/>
                     <field name="standard"/>
                     <field name="field"/>
@@ -857,6 +860,7 @@
                     <field name="Gender"/>
                     <field name="birthday"/>
                     <field name="Age"/>
+                    <field name="desc"/>
                 </group>
                 <group string="Personal Information">
                 <field name="address"/>
@@ -879,6 +883,7 @@
 </record>
 
 <!-- Tree view of Admission -->
+
 <record id="school_admission_tree" model="ir.ui.view">
     <field name="name">school.admission.tree</field>
     <field name="model">school.admission</field>
@@ -894,6 +899,7 @@
 </record>
 
 <!-- Student Attendance Form -->
+
 <record id="school_attendance_form" model="ir.ui.view">
     <field name="name">student.attendance.form</field>
     <field name="model">student.attendance</field>
@@ -912,7 +918,7 @@
                   <form>
                     <sheet>
                       <group>
-                        <field name="name"/>
+                        <field name="name_id"/>
                         <field name="Email"/>
                         <field name="attendance"/>
 
@@ -936,7 +942,7 @@
         <tree>
             <field name="date"/>
             <field name="standard"/>
-            <field name="name"/>
+            <field name="name_id"/>
         </tree>
     </field>
 </record>
@@ -958,6 +964,7 @@
     </record>
 
 <!-- Subject form -->
+
  <record id="school_subject_form" model="ir.ui.view">
             <field name="name">school.subject.form</field>
             <field name="model">school.subject</field>
@@ -974,6 +981,7 @@
         </form>
     </field>
 </record>
+
 <!-- Tree view for subject model  -->
 
  <record id="school_subject_tree" model="ir.ui.view">
@@ -991,6 +999,7 @@
 </record>
 
 <!-- Search view for subject model -->
+
 <record id="school_subject_search" model="ir.ui.view">
         <field name="name">school.subject.search</field>
         <field name="model">school.subject</field>
@@ -1013,6 +1022,7 @@
 
 
 <!-- Course form -->
+
  <record id="school_course_form" model="ir.ui.view">
             <field name="name">school.course.form</field>
             <field name="model">school.course</field>
@@ -1028,9 +1038,9 @@
                 <group string="Course">
                     <field name="stand"/>
                     <!-- <feild name="stand_field"/> -->
-                    <field name="subject_details"/>
+                    <field name="subject_details_ids"/>
                     <field name="teacher_details"/>
-                    <field name="fees_details"/>
+                    <field name="fees_details_ids"/>
                 </group>
             </sheet>
         </form>
@@ -1045,8 +1055,7 @@
             <field name="arch" type="xml">
           <tree>
                     <field name="stand"/>
-                    <!-- <field name="stand_field"/> -->
-                    <field name="subject_details"/>
+                    <field name="subject_details_ids"/>
                 
         </tree>
     </field>
@@ -1129,8 +1138,8 @@
                   <form>
                     <sheet>
                       <group>
-                        <field name="teacher_name"/>
-                        <field name="stu_name"/>
+                        <field name="teacher_name_id"/>
+                        <field name="stu_name_id"/>
                         <field name="Email"/>
                         <field name="stand"/>
 
@@ -1147,6 +1156,7 @@
 
 
 <!-- tree view for  Bookissue -->
+
 <record id="school_bookissue_tree" model="ir.ui.view">
     <field name="name">school.bookissue.tree</field>
     <field name="model">school.bookissue</field>
@@ -1155,13 +1165,14 @@
             <field name="card_no"/>
             <field name="issue_date"/>
             <field name="return_date"/>
-            <field name="stu_name"/>
+            <field name="stu_name_id"/>
         </tree>
     </field>
 </record>
 
 
 <!-- Search view for Bookissue -->
+
 <record  id="school_bookissue_search" model="ir.ui.view">
     <field name="name">school.bookissue.search</field>
     <field name="model">school.bookissue</field>
@@ -1169,7 +1180,7 @@
         <search>
             <field name="card_no"/>
             <field name="book_name"/>
-            <field name="stu_name"/>
+            <field name="stu_name_id"/>
                 <searchpanel>
                     <field name="stand" enable_counters="1"/>
                 </searchpanel>
@@ -1191,8 +1202,7 @@
                 <xpath expr="//[@name='sports_fees']" position="before">
                     <field name="fee_status"/>
                  </xpath>
-                    <!-- <field name="fee_status"/> -->
-                    <field name="name"/>
+                    <field name="name_id"/>
                 </group>
             </sheet>
         </form>
@@ -1200,18 +1210,20 @@
 </record>
 
 <!-- Tree view for fees status  -->
+
 <record id="fees_status_tree" model="ir.ui.view">
         <field name="name">fees.status.tree</field>
         <field name="model">fees.status</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>   
+                <field name="name_id"/>   
                 <field name="fee_status"/>
                 <field name="total_fees"/>
                 <!-- view error -->
             </tree>
         </field>
     </record>
+
 <!-- About Us form -->
 
 <record id="school_about_form" model="ir.ui.view">
@@ -1262,6 +1274,9 @@
         </field>
     </record>
 
+
+<!-- Home form -->
+
 <record id="school_homepage_form" model="ir.ui.view">
         <field name="name">homepage.form</field>
         <field name="model">homepage</field>
@@ -1279,6 +1294,8 @@
 </field>
 </record>
 </odoo>
+
+
 
 
 

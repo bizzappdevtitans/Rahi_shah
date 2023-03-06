@@ -26,8 +26,7 @@
         parent="student_menu_root"
          sequence="4"
         />
-        <!-- action="aboutus_action" -->
-       
+
 
     <menuitem id="academic_menu"
         name="School Calendar"
@@ -39,6 +38,8 @@
         parent="student_menu_root"
         action="Admission_action"
       />
+
+ 
    
  <!-- Sub menu of Student Menu -->
     
@@ -169,4 +170,9 @@
         parent="about_us"
         action="award_action"
         />
+    <!-- <menuitem id="wizard_menu"
+        name="wizard"
+        parent="about_us"
+        action="action_view_demo_wizard"
+        /> -->
   </odoo> 

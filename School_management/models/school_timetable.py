@@ -14,6 +14,7 @@ class SchoolTimeTable(models.Model):
     name_id = fields.Many2one("school.teacher", "LectureBy")
     phone = fields.Char(related="name_id.phone", string="phone")
 
+    # apply thr API Constraints for the user can't select the Past date
     @api.constrains("lec_date")
     def _check_date(self):
         for record in self:

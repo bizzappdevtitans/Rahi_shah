@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError, UserError
-import re 
+import re
 
 
 class SchoolAdmission(models.Model):
@@ -9,6 +9,7 @@ class SchoolAdmission(models.Model):
     _inherit = ["mail.thread"]
     _description = "School Admission Model"
 
+    admission_id = fields.Char(string="ID")
     sch_name = fields.Char(string="School Name")
     standard = fields.Selection(
         [
@@ -23,7 +24,7 @@ class SchoolAdmission(models.Model):
         ]
     )
     name = fields.Char(string="Name")
-    stu_email=fields.Char(string="Email")
+    stu_email = fields.Char(string="Email")
     Gender = fields.Selection(
         [
             ("male", "Male"),
@@ -36,6 +37,7 @@ class SchoolAdmission(models.Model):
     phone = fields.Char(string="Contact")
     admission_query = fields.Text()
     admission_count = fields.Integer(compute="damage")
+    desc = fields.Text()
 
     admision_state = fields.Selection(
         [
@@ -56,17 +58,22 @@ class SchoolAdmission(models.Model):
     def button_confirm(self):
         self.write({"admision_state": "confirm"})
 
+    """Apply the API Constarints for the name must be filledout validation """
+
     @api.constrains("name")
     def _name_validation(self):
         for record in self:
             if record.name == False:
                 raise ValidationError("Name must be filled out")
 
+    # the API Constraints for the name length validation
     @api.constrains("name")
     def name_validate(self):
         for record in self:
             if len(record.name) < 2:
-                raise ValidationError("Length of name is Less than 2...")
+                raise ValidationError("Length of Name is not valid...")
+
+    # the API Constraints for the user can't select the Future date
 
     @api.constrains("birthday")
     def _check_date(self):
@@ -74,12 +81,14 @@ class SchoolAdmission(models.Model):
             if record.birthday > fields.Date.today():
                 raise ValidationError("The BirthDate cannot be set in the Future")
 
+    #  the API Constraints for the phone number validation can't be more than 10
     @api.constrains("phone")
     def phone_validation(self):
         for record in self:
             if len(record.phone) != 10:
                 raise ValidationError("Phone Number is not valid")
 
+    # the API Constraints for the user Email validation
     @api.constrains("stu_email")
     def validate_mail(self):
         if self.stu_email:
@@ -90,19 +99,21 @@ class SchoolAdmission(models.Model):
             if match == None:
                 raise ValidationError("Email id is not valid")
 
-    # browse ORM Method
+    # browse ORM Method to print the record
+
+    @api.depends("admission_id")
     def action_browse(self):
         for rec in self:
-            students = self.env["school.admission"].browse(21)
-            print(students.name)
+            rec.desc = self.env["school.admission"].browse(rec.admission_id).name
+            return self.desc
 
-    # Default_Get ORM Method
+    # Default_Get ORM Method for print the default value
     def default_get(self, field_list=[]):
         retur = super(SchoolAdmission, self).default_get(field_list)
         retur["name"] = "Your Name"
         return retur
 
-    # unlink ORM Method
+    # unlink ORM Method for can't delete the confirm admission
 
     @api.model
     def unlink_method(self, values):

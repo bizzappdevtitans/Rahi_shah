@@ -11,9 +11,9 @@ class schoolBookIssue(models.Model):
     book_name = fields.Char(string="Book Name")
     card_no = fields.Char(string="Card Number")
 
-    teacher_name = fields.Many2one("school.teacher", "Teacher Name")
-    stu_name = fields.Many2one("school.student", "student Name")
-    Email = fields.Char(related="stu_name.Email", string="Student Mail")
+    teacher_name_id = fields.Many2one("school.teacher", "Teacher Name")
+    stu_name_id = fields.Many2one("school.student", "student Name")
+    Email = fields.Char(related="stu_name_id.Email", string="Student Mail")
 
     stand = fields.Selection(
         [
@@ -26,14 +26,9 @@ class schoolBookIssue(models.Model):
     issue_date = fields.Date(string="Book Issue Date")
     return_date = fields.Date(string="Book Return Date")
 
+    # apply thr API Constraints for the user can't select the past date
     @api.constrains("issue_date")
     def _check_date(self):
         for record in self:
             if record.issue_date < fields.Date.today():
                 raise ValidationError("The Issue date cannot be set in the Past")
-
-    @api.model
-    def create(self, value):
-        value = {"book_name": "ABC"}
-        name_create = super(schoolBookIssue, self).create(value)
-        return name_create

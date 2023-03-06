@@ -13,6 +13,8 @@ class SchoolAssignment(models.Model):
     task = fields.Char(string="Describe assignmnent")
     submit = fields.Datetime(string="Deadline Time")
 
+
+    # apply thr API Constraints for the user can't select the Past Date
     @api.constrains("submit")
     def _check_date(self):
         for record in self:

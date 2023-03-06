@@ -7,6 +7,7 @@ class StudentAttendance(models.Model):
     _name = "student.attendance"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Student Attendance Module"
+    _rec_name = "name_id"
 
     date = fields.Date(string="Today's Date")
     standard = fields.Selection(
@@ -15,8 +16,8 @@ class StudentAttendance(models.Model):
             ("12", "12th Standard"),
         ]
     )
-    name = fields.Many2one("school.student", "student Name")
-    Email = fields.Char(related="name.Email", string="Student Mail")
+    name_id = fields.Many2one("school.student", "student Name")
+    Email = fields.Char(related="name_id.Email", string="Student Mail")
     attendance = fields.Selection(
         [
             ("present", "Present"),
@@ -24,11 +25,10 @@ class StudentAttendance(models.Model):
         ]
     )
 
+    # apply thr API Constraints for the user can't select the Future date
+
     @api.constrains("date")
     def _check_date(self):
         for record in self:
             if record.date > fields.Date.today():
                 raise ValidationError("The Attendance Date cannot be set in the Future")
-
-
-

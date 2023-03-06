@@ -13,6 +13,7 @@ class schoolExam(models.Model):
     day = fields.Char(string="Day of Exam")
     subject = fields.Char(string="Subject")
 
+    # apply thr API Constraints for the user can't select the Past Date
     @api.constrains("date")
     def _check_date(self):
         for record in self:

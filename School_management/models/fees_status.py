@@ -11,4 +11,4 @@ class FeesStatus(models.Model):
             ("complete", "Complete"),
         ]
     )
-    name = fields.Many2one("school.student", "student Name")
+    name_id = fields.Many2one("school.student", "student Name")

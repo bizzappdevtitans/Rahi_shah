@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+<record id="teacher_leave_wizard_form" model="ir.ui.view">
+    <field name="name">teacher.leave.wizard.form</field>
+    <field name="model">teacher.leave.wizard</field>
+    <field name="arch" type="xml">
+            <form>
+                <field name="teacher_id" />
+                <field name="date"/>
+                <field name="reason"/>
+                <footer>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/> 
+             <button name="set_teacher" string="Create" class="oe_right oe_highlight"
+                            type="object"/>
+                </footer>
+            
+            </form>
+        </field>
+    </record>
+    <record id="action_view_teacher_wizard" model="ir.actions.act_window">
+            <field name="name">Create wizard</field>
+            <field name="res_model">teacher.leave.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+    </field>
+</record>
+
+
+</odoo>

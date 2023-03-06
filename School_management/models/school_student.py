@@ -30,8 +30,10 @@ class SchoolStudent(models.Model):
     photo = fields.Binary(string="student Photo")
     query = fields.Text()
 
-    result_list = fields.Many2many("student.result", string="student_result")
+    result_list_ids = fields.Many2many("student.result", string="student_result")
     result_count = fields.Integer(string="result_count", compute="_compute_count")
+
+    # count the total records in smart button
 
     def get_result(self):
         self.ensure_one()
@@ -48,6 +50,8 @@ class SchoolStudent(models.Model):
         for record in self:
             record.result_count = len(self.result_list)
 
+    # onchange method for calulate the student age
+
     @api.onchange("birth")
     def _calc_age(self):
         for res in self:
@@ -55,10 +59,14 @@ class SchoolStudent(models.Model):
             if res.birth:
                 res.Age = today.year - res.birth.year
 
+    # ondelete method for the student name record can;t delete
+
     @api.ondelete(at_uninstall=False)
     def _unlink_except_done(self):
         if self.name == "zaid":
             raise UserError(("You cannot delete...."))
+
+    # apply thr API Constraints for validate the user email id
 
     @api.constrains("Email")
     def validate_mail(self):
@@ -97,4 +105,5 @@ class SchoolStudent(models.Model):
         return super(SchoolStudent, self)._name_search(
             name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid
         )
+
 

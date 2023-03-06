@@ -6,7 +6,6 @@ class Schoolsubject(models.Model):
     _description = "School Module"
     _rec_name = "stand"
 
-    # stand = fields.Char(string="Standard")
     stand = fields.Selection(
         [
             ("11thcommerce", "11thCommerce"),
