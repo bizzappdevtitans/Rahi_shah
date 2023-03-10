@@ -13,9 +13,10 @@ class SchoolAssignment(models.Model):
     task = fields.Char(string="Describe assignmnent")
     submit = fields.Datetime(string="Deadline Time")
 
+    """ create the _check_date function for check the Deadline Date
+    if user select the past Date for Deadline then it will generate the Validation Error """
 
-    # apply thr API Constraints for the user can't select the Past Date
-    @api.constrains("submit")
+    @api.constrains("submit")  # use the constrains method decorators
     def _check_date(self):
         for record in self:
             if record.submit < fields.Datetime.today():

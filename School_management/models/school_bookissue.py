@@ -26,8 +26,11 @@ class schoolBookIssue(models.Model):
     issue_date = fields.Date(string="Book Issue Date")
     return_date = fields.Date(string="Book Return Date")
 
-    # apply thr API Constraints for the user can't select the past date
-    @api.constrains("issue_date")
+
+    """ create the _check_date function for check the book Issue date
+    if user select the Past Date for issue date then it will generate the Validation Error """
+
+    @api.constrains("issue_date") #use the Constrains method decorators
     def _check_date(self):
         for record in self:
             if record.issue_date < fields.Date.today():

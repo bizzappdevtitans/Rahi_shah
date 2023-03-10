@@ -8,7 +8,7 @@ class SchoolResult(models.Model):
     _rec_name = "name_id"
 
     result_sequence = fields.Char(
-        "Student sequence", required=True, index=True, copy=False, default="New"
+        "Student sequence", index=True, copy=False, default="New"
     )
     name_id = fields.Many2one("school.student", "student Name")
     Email = fields.Char(related="name_id.Email", string="Student Mail")
@@ -26,8 +26,10 @@ class SchoolResult(models.Model):
             ("fail", "FAIL"),
         ]
     )
+    grade = fields.Char("Grade")
 
-    # To caluclate the total marks and percentage
+    """Create the cal_marks function to calculate the total Marks
+    if Teacher change the Marks  of the student then the total Marks is also change """
 
     @api.depends("Eco", "ba", "acc", "state", "Gujrati")
     def cal_marks(self):
@@ -38,6 +40,8 @@ class SchoolResult(models.Model):
                 }
             )
 
+    """ create the cal_perce function to calculate the percentage """
+
     def cal_perce(self):
         for res in self:
             res.update(
@@ -46,15 +50,17 @@ class SchoolResult(models.Model):
                 }
             )
 
-    # the Roll Number must be unique
+    # Use the SQL Constraints for Roll Number must be unique
+
     _sql_constraints = [
         ("roll_unique", "unique(roll)", "Roll number Must be  is unique..."),
     ]
 
-    # apply thr API Constraints for Marks is not greater than 100
+    """Create the _check_marks function for Checking the Marks is not greater than 100 
+    if Teacher Enter the mopre than 100 it will generate the Validation Error"""
 
     @api.constrains("Eco", "ba", "acc", "state", "Gujrati")
-    def _check_date(self):
+    def _check_marks(self):
         for rec in self:
             if (
                 rec.Eco > 100
@@ -65,7 +71,7 @@ class SchoolResult(models.Model):
             ):
                 raise ValidationError("Marks can't be more than 100")
 
-    # generetaing sequence
+    # generating sequence Student Result
 
     @api.model
     def create(self, vals):

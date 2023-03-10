@@ -25,7 +25,8 @@ class StudentAttendance(models.Model):
         ]
     )
 
-    # apply thr API Constraints for the user can't select the Future date
+    """create the _check_date function for check the Date of Attendance
+    if Admin select the Future Date for Attendance then it will generate the Validation Error """
 
     @api.constrains("date")
     def _check_date(self):

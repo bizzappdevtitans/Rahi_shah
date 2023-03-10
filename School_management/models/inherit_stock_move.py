@@ -4,7 +4,7 @@ from odoo import fields, models
 class stock(models.Model):
     _inherit = "stock.move"
 
-    """This function is used to pass the value from sale_order to Delivery"""
+    """create the _get_new_picking_values function to pass the value from sale_order to Delivery"""
 
     def _get_new_picking_values(self):
         vals = super(stock, self)._get_new_picking_values()
@@ -14,7 +14,7 @@ class stock(models.Model):
         )
         return vals
 
-    """This function is used to pass the value from sale_order to Manufacturing"""
+    """create the _prepare_procurement_values function to pass the value from sale_order to Manufacturing"""
 
     def _prepare_procurement_values(self):
         res = super()._prepare_procurement_values()

@@ -53,43 +53,50 @@ class SchoolAdmission(models.Model):
     )
 
     def button_in_progress(self):
-        self.write({"admision_state": "mode"})
+        self.write({"admision_state": "mode"})  # written the state mode for In progress
 
     def button_confirm(self):
-        self.write({"admision_state": "confirm"})
+        self.write({"admision_state": "confirm"})  # written the state mode for Confirm
 
-    """Apply the API Constarints for the name must be filledout validation """
+    """Create the _name_validation function for validate the Name field must be filled out
+    if name field is empty then it will generate the Validation Error"""
 
-    @api.constrains("name")
+    @api.constrains("name")  # use the constrains method decorators
     def _name_validation(self):
         for record in self:
             if record.name == False:
                 raise ValidationError("Name must be filled out")
 
-    # the API Constraints for the name length validation
-    @api.constrains("name")
+    """Create the name_validate function for validate the Name length
+    if User Enter less than 2 character in Name then it will Generate the Validation Error """
+
+    @api.constrains("name")  # use the constrains method decorators
     def name_validate(self):
         for record in self:
             if len(record.name) < 2:
                 raise ValidationError("Length of Name is not valid...")
 
-    # the API Constraints for the user can't select the Future date
+    """ create the _check_date function for check the Birthdate
+    if user select the future Date for birthday then it will generate the Validation Error """
 
-    @api.constrains("birthday")
+    @api.constrains("birthday")  # use the constrains method decorators
     def _check_date(self):
         for record in self:
             if record.birthday > fields.Date.today():
                 raise ValidationError("The BirthDate cannot be set in the Future")
 
-    #  the API Constraints for the phone number validation can't be more than 10
-    @api.constrains("phone")
+    """ create the phone_validate function for check the length of the phon number
+    if user enter less than or more than 10 Numbers it will generate the Validation Error"""
+
+    @api.constrains("phone")  # use the constrains method decorators
     def phone_validation(self):
         for record in self:
             if len(record.phone) != 10:
                 raise ValidationError("Phone Number is not valid")
 
-    # the API Constraints for the user Email validation
-    @api.constrains("stu_email")
+    """ Create the validate_mail function for validate the User eamil id pattern """
+
+    @api.constrains("stu_email")  # use the constrains method decorators
     def validate_mail(self):
         if self.stu_email:
             match = re.match(
@@ -99,24 +106,27 @@ class SchoolAdmission(models.Model):
             if match == None:
                 raise ValidationError("Email id is not valid")
 
-    # browse ORM Method to print the record
+    """ create the action_browse method for displaying the record,user click on the browse 
+    button in the desc field it's show the user admission id """
 
-    @api.depends("admission_id")
+    @api.depends("admission_id")  # use the Depends method decorators
     def action_browse(self):
         for rec in self:
-            rec.desc = self.env["school.admission"].browse(rec.admission_id).name
+            rec.desc = self.env["school.admission"].browse(rec.admission_id).id
             return self.desc
 
-    # Default_Get ORM Method for print the default value
-    def default_get(self, field_list=[]):
+    """create the default_get ORM method to print the default value in the Name field"""
+
+    def default_get(self, field_list=[]):  # use the Default get ORM Method
         retur = super(SchoolAdmission, self).default_get(field_list)
         retur["name"] = "Your Name"
         return retur
 
-    # unlink ORM Method for can't delete the confirm admission
+    """Create the unlink_method function if user delete the record but 
+    it's  admission mode is Confirm  at that time UserError is occur """
 
     @api.model
-    def unlink_method(self, values):
+    def unlink_method(self, values):  # use the Unlink ORM Method
         if (admision_state == "confirm" for admision_state in self):
             raise UserError(("You cannot delete,it's in Confirm Mode....."))
         unlink_record = super(SchoolAdmission, self).unlink()

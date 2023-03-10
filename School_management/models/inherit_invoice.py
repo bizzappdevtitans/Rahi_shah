@@ -4,7 +4,7 @@ class down(models.TransientModel):
     _inherit = "sale.advance.payment.inv"
 
 
-    """this function is used to pass the Value from sale order to Downpayment Invoice """
+    """create the _prepare_invoice_values function to pass the Value from sale order to Downpayment Invoice """
 
     def _prepare_invoice_values(self, order, name, amount, so_line):
         invoice_vals = super(down, self)._prepare_invoice_values(

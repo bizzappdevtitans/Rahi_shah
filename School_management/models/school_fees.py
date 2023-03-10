@@ -21,9 +21,10 @@ class Schoolfees(models.Model):
     exam_fees = fields.Integer(string="Exam Fees")
     total_fees = fields.Integer(string="Total Fees")
 
-    # Onchange method for count the total marks of subject
+    """Create the cal_fees function to calculate the total fees
+    if Admin chage the Amount of the fees then the total fees amount is also change """
 
-    @api.onchange("academic_fees", "tuition_fees", "sports_fees", "exam_fees")
+    @api.onchange("academic_fees", "tuition_fees", "sports_fees", "exam_fees")  # Onchange method for count the total Fees 
     def cal_fees(self):
         for res in self:
             res.update(

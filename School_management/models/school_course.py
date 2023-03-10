@@ -23,7 +23,7 @@ class Schoolcourse(models.Model):
     fees_details_ids = fields.Many2many("school.fees", string="Fees Details")
     teacher_count = fields.Integer(string="teacher_count", compute="compute_count")
 
-    # for couting the teacher using smart button
+    # Write the Method to generate the Smart Button
 
     def get_teacher(self):
         self.ensure_one()
@@ -36,9 +36,12 @@ class Schoolcourse(models.Model):
             "context": "{'create': False}",
         }
 
-    # search Count ORM method
+    """create the compute_count function to count the Records in the Smart Number"""
+
     def compute_count(self):
         for record in self:
-            record.teacher_count = self.env["school.teacher"].search_count(
+            record.teacher_count = self.env[
+                "school.teacher"
+            ].search_count(                    # use the Search_count to count the Records
                 [("id", "in", self.teacher_details.ids)]
             )

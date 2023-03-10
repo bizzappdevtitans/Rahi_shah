@@ -18,14 +18,16 @@ class SchoolTeacher(models.Model):
         ],
         string="Student Details",
     )
-    #apply thr API Constraints for Phone number length
+    """ create the phone_validate function for check the length of the phon number
+    if user enter less than or more than 10 Numbers it will generate the Validation Error"""
+
     @api.constrains("phone")
     def phone_validation(self):
         for record in self:
             if len(record.phone) != 10:
                 raise ValidationError("Phone Number is not valid")
 
-    # Name_Get ORM Method
+    # create Name_Get ORM Method To Append the First name and last name of teacher
 
     def name_get(self):
         result = []

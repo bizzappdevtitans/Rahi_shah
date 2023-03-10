@@ -4,7 +4,7 @@ from odoo import fields, models
 class StockRule(models.Model):
     _inherit = "stock.rule"
 
-    """This function is used to pass the value from sale_order to Manufacturing"""
+    """create the _prepare_mo_vals function to pass the value from sale_order to Manufacturing"""
 
     def _prepare_mo_vals(
         self,

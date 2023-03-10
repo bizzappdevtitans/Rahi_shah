@@ -20,8 +20,9 @@ School_management.access_school_bookissue,access_school_bookissue,School_managem
 School_management.access_homepage,access_homepage,School_management.model_homepage,base.group_user,1,1,1,1
 School_management.access_fees_status,access_fees_status,School_management.model_fees_status,base.group_user,1,1,1,1
 
-School_management.access_demo_wizard,access_demo_wizard,School_management.model_demo_wizard,base.group_user,1,1,1,0
-School_management.access_teacher_leave_wizard,access_teacher_leave_wizard,School_management.model_teacher_leave_wizard,base.group_user,1,1,1,0
+School_management.access_demo_wizard,access_demo_wizard,School_management.model_demo_wizard,base.group_user,1,1,1,1
+School_management.access_student_grade_wizard,access_student_grade_wizard,School_management.model_student_grade_wizard,base.group_user,1,1,1,1
+School_management.access_create_student_wizard,access_create_student_wizard,School_management.model_create_student_wizard,base.group_user,1,1,1,0
 
 
 

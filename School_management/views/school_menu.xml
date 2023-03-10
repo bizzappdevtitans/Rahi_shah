@@ -9,6 +9,7 @@
     <menuitem id="student_menu"
         name="Student"
         parent="student_menu_root" 
+        groups="School_management.group_school_teacher"
      />
      
     <menuitem id="teacher_menu"
@@ -27,7 +28,6 @@
          sequence="4"
         />
 
-
     <menuitem id="academic_menu"
         name="School Calendar"
         parent="student_menu_root"
@@ -39,8 +39,7 @@
         action="Admission_action"
       />
 
- 
-   
+
  <!-- Sub menu of Student Menu -->
     
     <menuitem id="student_form"
@@ -164,15 +163,12 @@
         name="AboutUs"
         parent="about_us"
         action="aboutus_action"
+        groups="School_management.group_school_student"
         /> 
     <menuitem id="award_menu"
         name="Awards and Recognition"
         parent="about_us"
         action="award_action"
         />
-    <!-- <menuitem id="wizard_menu"
-        name="wizard"
-        parent="about_us"
-        action="action_view_demo_wizard"
-        /> -->
+
   </odoo> 

@@ -28,12 +28,13 @@ class SchoolStudent(models.Model):
     result = fields.Float(string="Enter last year Result")
     city = fields.Boolean(string="Click if you from ahmedabad")
     photo = fields.Binary(string="student Photo")
+    grade = fields.Char("Grade")
     query = fields.Text()
 
     result_list_ids = fields.Many2many("student.result", string="student_result")
     result_count = fields.Integer(string="result_count", compute="_compute_count")
 
-    # count the total records in smart button
+    # Write the Method to generate the Smart Button
 
     def get_result(self):
         self.ensure_one()
@@ -42,15 +43,18 @@ class SchoolStudent(models.Model):
             "name": "Teacher",
             "view_mode": "tree,form",
             "res_model": "student.result",
-            "domain": [("id", "in", self.result_list.ids)],
+            "domain": [("id", "in", self.result_list_ids.ids)],
             "context": "{'create': False}",
         }
 
+    # create the _compute_count method to count the total Records of the smart Button
+
     def _compute_count(self):
         for record in self:
-            record.result_count = len(self.result_list)
+            record.result_count = len(self.result_list_ids)
 
-    # onchange method for calulate the student age
+    """Create the _calc_age function to calculate the Age of the student based on the 
+    today date if student change the date then age of student is also change """
 
     @api.onchange("birth")
     def _calc_age(self):
@@ -59,14 +63,15 @@ class SchoolStudent(models.Model):
             if res.birth:
                 res.Age = today.year - res.birth.year
 
-    # ondelete method for the student name record can;t delete
+    """ create the _unlink_except_done function for not deleteing the particular Record
+    if User try to delete zaid Record then it will generate the User Error """
 
     @api.ondelete(at_uninstall=False)
     def _unlink_except_done(self):
         if self.name == "zaid":
             raise UserError(("You cannot delete...."))
 
-    # apply thr API Constraints for validate the user email id
+    """ Create the validate_mail function for validate the User eamil id pattern """
 
     @api.constrains("Email")
     def validate_mail(self):
@@ -87,7 +92,8 @@ class SchoolStudent(models.Model):
             res = super(SchoolStudent, self).create(vals)
         return res
 
-    # name search ORM method
+    # Create the Name search ORM method to search the Name
+
     @api.model
     def _name_search(
         self, name, args=None, operator="ilike", limit=100, name_get_uid=None
@@ -105,5 +111,3 @@ class SchoolStudent(models.Model):
         return super(SchoolStudent, self)._name_search(
             name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid
         )
-
-
