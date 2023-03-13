@@ -16,6 +16,7 @@ class StudentSubmit(models.Model):
             ("start", "Start"),
             ("mode", "In Progrees"),
             ("done", "Done"),
+            ("confirm", "Confirm"),
         ],
         string="status",
         required=True,
@@ -29,6 +30,9 @@ class StudentSubmit(models.Model):
 
     def button_done(self):
         self.write({"state": "done"})  # written the state mode for Done
+        
+    def button_confirm(self):
+        self.write({"state": "confirm"})  # written the state mode for confirm
 
     assignment_details_ids = fields.Many2many("school.assignmnent", "task")
     description = fields.Text()

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+     <record id="submission_action" model="ir.actions.act_window">
+            <field name="name">Submission</field>
+            <field name="res_model">school.submit</field>
+            <field name="view_mode">tree,form,graph</field>
+
+    </record> 
+
+<!-- Submit assignment Form  -->
+
+  <record id="student_submit_form" model="ir.ui.view">
+            <field name="name">school.submit.form</field>
+            <field name="model">school.submit</field>
+            <field name="arch" type="xml">
+
+          <form>
+            <header>
+                <button name="button_in_progress" class="oe_highlight" state="mode" string="In Progress" 
+                    type="object" help="In Progress state" />
+                <button name="button_done" class="oe_highlight" state="done" string="Done" 
+                    type="object" help="Done state" />
+                  <button name="button_confirm" class="oe_highlight" state="confirm" string="Confirm" 
+                    type="object" help="Confirm state" groups="School_management.group_school_student" />
+                <field name="state" widget="statusbar" statusbar_visible="start,mode,done"/>
+            </header>
+            <sheet>
+                <group string="Submission">
+                    <field name="name_id"/>
+                    <field name="stu_stand"/>
+                    <field name="assi_sub"/>
+                    <field name="sub"  widget="file"/>
+                    <field name="assignment_details_ids"/>
+                </group>
+                <notebook>
+                    <page string="description">
+                        <field name="description"/>
+                    </page>
+                </notebook>
+                 
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Tree view for Submit Assignment -->
+
+<record id="student_submit_tree" model="ir.ui.view">
+            <field name="name">school.submit.tree</field>
+            <field name="model">school.submit</field>
+            <field name="arch" type="xml">
+
+
+          <tree>
+                    <field name="name_id"/>
+                    <field name="stu_stand"/>
+                    <field name="assi_sub"/>
+                    <field name="state"/>
+        </tree>
+    </field>
+</record>
+<!-- Graph view for Submit Assignment  -->
+
+<record id="student_submit_graph" model="ir.ui.view">
+    <field name="name">school.submit.graph</field>
+    <field name="model">school.submit</field>
+    <field name="arch" type="xml">
+        <graph>
+            <field name="name_id"/>
+            <field name="stu_stand"/>
+            <field name="assi_sub"/>
+        </graph>
+    </field>
+</record>
+</odoo>

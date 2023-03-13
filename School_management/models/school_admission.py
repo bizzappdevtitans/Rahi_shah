@@ -57,6 +57,7 @@ class SchoolAdmission(models.Model):
 
     def button_confirm(self):
         self.write({"admision_state": "confirm"})  # written the state mode for Confirm
+    
 
     """Create the _name_validation function for validate the Name field must be filled out
     if name field is empty then it will generate the Validation Error"""

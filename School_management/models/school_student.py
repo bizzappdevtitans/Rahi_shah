@@ -111,3 +111,9 @@ class SchoolStudent(models.Model):
         return super(SchoolStudent, self)._name_search(
             name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid
         )
+
+
+    @api.model
+    def _cron_send_birthday(self):
+        print("birthday")
+
