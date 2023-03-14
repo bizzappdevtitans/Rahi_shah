@@ -171,6 +171,7 @@
                     <field name="result" widget="percentage"/>
                     <field name="city" widget="boolean_toggle"/>
                     <field name="photo" widget="image" width="90px"/>
+                    <field name="birthday_wish" />
                 </group>
                 <group>
                     <field name="result_list_ids"/>
@@ -691,6 +692,8 @@
                 <field name="phone"/>
             </group>
              <button name="action_browse" string="Browse" type="object" style="background:lightblue" width="80px" /> 
+             <button name="action_url" string="Action URL" type="object" style="background:lightblue" width="80px" 
+             confirm="Are You sure you want to Redirect ?" />
             </group>
               <notebook>
                 <page string="Any Query">

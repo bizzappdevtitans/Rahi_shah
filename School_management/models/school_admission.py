@@ -57,7 +57,6 @@ class SchoolAdmission(models.Model):
 
     def button_confirm(self):
         self.write({"admision_state": "confirm"})  # written the state mode for Confirm
-    
 
     """Create the _name_validation function for validate the Name field must be filled out
     if name field is empty then it will generate the Validation Error"""
@@ -132,3 +131,12 @@ class SchoolAdmission(models.Model):
             raise UserError(("You cannot delete,it's in Confirm Mode....."))
         unlink_record = super(SchoolAdmission, self).unlink()
         return unlink_record
+
+    """create the action_url function to redirect to another page/model based on the URL"""
+
+    def action_url(self):
+        return {
+            "type": "ir.actions.act_url",
+            "target": "new",
+            "url": "http://localhost:8083/web#cids=1&menu_id=124&action=189&model=school.about&view_type=form",
+        }

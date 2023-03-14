@@ -30,6 +30,12 @@ class SchoolStudent(models.Model):
     photo = fields.Binary(string="student Photo")
     grade = fields.Char("Grade")
     query = fields.Text()
+    birthday_wish = fields.Selection(
+        [
+            ("wish", "Happy birthday"),
+            ("later", " "),
+        ]
+    )
 
     result_list_ids = fields.Many2many("student.result", string="student_result")
     result_count = fields.Integer(string="result_count", compute="_compute_count")
@@ -112,8 +118,19 @@ class SchoolStudent(models.Model):
             name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid
         )
 
+    """create the _cron_send_birthday method for print the birthday message,
+    DOB compare with today's date if the date is match it will print the birthday message 
+    this method link with cron job """
 
     @api.model
     def _cron_send_birthday(self):
         print("birthday")
+        if self.env["school.student"].search([("birth", "=", fields.Date.today())]):
+            self.env["school.student"].search(
+                [("birth", "=", fields.Date.today())]
+            ).write({"birthday_wish": "wish"})
 
+        elif self.env["school.student"].search([("birth", "!=", fields.Date.today())]):
+            self.env["school.student"].search(
+                [("birth", "!=", fields.Date.today())]
+            ).write({"birthday_wish": "later"})

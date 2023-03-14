@@ -8,9 +8,20 @@
             <field name="type">ir.actions.server</field>
             <field name="state">code</field>
             <field name="code">model._cron_send_birthday()</field>
-            <field name="interval_number">2</field>
-            <field name="interval_type">Minutes</field>
-            <field name="numbercall">10</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+        </record>
+
+     <record model="ir.cron" id="send_message_cron">
+            <field name="name">Assignment Not submitted Cron</field>
+            <field name="model_id" ref="model_school_submit" />
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.cron_send_message()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
         </record>
      </data>
   </odoo>
