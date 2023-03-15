@@ -1,3 +1,4 @@
+import datetime
 from datetime import date
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -134,3 +135,17 @@ class SchoolStudent(models.Model):
             self.env["school.student"].search(
                 [("birth", "!=", fields.Date.today())]
             ).write({"birthday_wish": "later"})
+
+    """create the action_send_birthday_email method to send the birthday mail using 
+    cron job """
+
+    def action_send_birthday_email(self):
+        for record in self.search([]):
+            today = date.today()
+            print(today)
+            if today.day == record.birth.day and today.month == record.birth.month:
+                template_id = self.env.ref(
+                    "School_management.student_birthday_mail_template"
+                ).id
+                template = self.env["mail.template"].browse(template_id)
+                template.send_mail(self.id, force_send=True)

@@ -12,6 +12,7 @@ This module contains all the common features of School Management.
         "Data/seq.xml",
         "Data/server_action.xml",
         "Data/cron.xml",
+        "Data/email_template.xml",
         "security/ir.model.access.csv",
         "security/school_security.xml",
         "wizard/demo_wizard_view.xml",
