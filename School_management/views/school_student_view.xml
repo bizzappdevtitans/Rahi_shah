@@ -199,6 +199,7 @@
     <field name="model">school.student</field>
     <field name="arch" type="xml">
         <kanban class="o_res_partner_kanban">
+                    <field name="sequence"/>
                     <field name="name"/>
                     <field name="Email"/>
                     <field name="birth" />
@@ -224,8 +225,9 @@
                     
                     </t>
                 </templates>
+           
             </kanban>
-        </field>
+         </field>
 </record>
 
 <!-- graph view for student -->

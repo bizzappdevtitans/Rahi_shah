@@ -148,4 +148,12 @@ class SchoolStudent(models.Model):
                     "School_management.student_birthday_mail_template"
                 ).id
                 template = self.env["mail.template"].browse(template_id)
-                template.send_mail(self.id, force_send=True)
+                template.send_mail(record.id, force_send=True)
+                message = "Happy Birthday"
+                channel_id = self.env.ref("mail.channel_all_employees").id
+                channel = self.env["mail.channel"].browse(channel_id)
+                channel.message_post(
+                    body=(message),
+                    message_type="comment",
+                    subtype_xmlid="mail.mt_comment",
+                )
