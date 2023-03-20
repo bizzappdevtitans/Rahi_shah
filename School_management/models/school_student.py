@@ -15,6 +15,7 @@ class SchoolStudent(models.Model):
     )
     name = fields.Char(string="Student Name", required=True)
     Email = fields.Char(string="Student Mail")
+    phone = fields.Char(string="Contact")
     birth = fields.Date(string="BirthDate")
     Gender = fields.Selection(
         [
@@ -77,6 +78,15 @@ class SchoolStudent(models.Model):
     def _unlink_except_done(self):
         if self.name == "zaid":
             raise UserError(("You cannot delete...."))
+
+    """ create the phone_validate function for check the length of the phon number
+    if user enter less than or more than 10 Numbers it will generate the Validation Error"""
+
+    @api.constrains("phone")  # use the constrains method decorators
+    def phone_validation(self):
+        for record in self:
+            if len(record.phone) != 10:
+                raise ValidationError("Phone Number is not valid")
 
     """ Create the validate_mail function for validate the User eamil id pattern """
 
@@ -157,3 +167,5 @@ class SchoolStudent(models.Model):
                     message_type="comment",
                     subtype_xmlid="mail.mt_comment",
                 )
+
+

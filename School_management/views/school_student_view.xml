@@ -143,6 +143,7 @@
             <header>
                 <button name="%(action_view_student_grade_wizard)d" title="Student Grade" type="action"
                     string="Student Grade"/>
+               
             </header>
             <sheet>
                 <div class="oe_title">
@@ -161,6 +162,7 @@
                     <group>
                     <field name="name" groups="School_management.group_school_student" />
                     <field name="Email" widget="email"/>
+                    <field name="phone"/>
                     <field name="birth"/>
                     <field name="Gender" widget="radio"/>
                     <field name="Age"/>
@@ -445,6 +447,9 @@
             <field name="arch" type="xml">
           <form>
             <sheet>
+                <header>
+                     <button name="action_send_whatsapp" data-hotkey="w" icon="fa-whatsapp" type="object" string="Whatsapp" />
+                </header>
                 <group string="TimeTable" >
                     <field name="stand"/>
                     <field name="lec_date"/>
@@ -953,6 +958,9 @@
     <field name="arch" type="xml">
         <form>
             <sheet>
+                <header>
+                    <button name="action_notification" type="object" string="Notification" />
+                </header>
                 <group string="BookIssue Form">
                     <field name="book_name"/>
                     <field name="card_no"/>

@@ -60,7 +60,15 @@
                     <field name="name_id"/>
                     <field name="stu_stand"/>
                     <field name="assi_sub"/>
-                    <field name="state"/>
+                    <field name="state"
+                        decoration-success="state == 'confirm'"
+                        decoration-info="state == 'done'"
+                        decoration-warning="state == 'mode'"
+                        decoration-danger="state == 'start'"
+                        widget="badge"
+
+
+                        />
         </tree>
     </field>
 </record>

@@ -1,5 +1,6 @@
 from odoo import fields, models
 
+
 class Inheritstock(models.Model):
     _inherit = "stock.picking"
 

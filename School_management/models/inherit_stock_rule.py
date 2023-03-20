@@ -31,3 +31,5 @@ class StockRule(models.Model):
         )
         res["Manufacturing_desc"] = values.get("Manufacturing_desc")
         return res
+
+

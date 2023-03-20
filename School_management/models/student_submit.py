@@ -67,5 +67,5 @@ class StudentSubmit(models.Model):
 
     @api.ondelete(at_uninstall=False)  # Use the Ondelete Method Decorators
     def _unlink_except_done(self):
-        if (state == "done" for state in self):
-            raise UserError(("You cannot delete,it's in Done Mode....."))
+        if (state == "confirm" for state in self):
+            raise UserError(("You cannot delete,it's in Confirm Mode....."))

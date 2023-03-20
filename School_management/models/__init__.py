@@ -26,3 +26,4 @@ from . import inherit_project_task
 from . import inherit_purchase
 from . import inherit_stock_rule
 from . import mrp_production
+from . import inherit_product_template

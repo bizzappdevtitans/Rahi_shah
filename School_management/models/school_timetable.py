@@ -22,3 +22,20 @@ class SchoolTimeTable(models.Model):
         for record in self:
             if record.lec_date < fields.Datetime.today():
                 raise ValidationError("The Lecture date cannot be set in the past")
+
+    """create the action_send_whatsapp function to send the message in whatsapp
+    when user click on the button the message will be send """
+
+    def action_send_whatsapp(self):
+        if not self.name_id.phone:
+            raise ValidationError("Missing the Phone Number")
+        msg = "Today is Lecture %s" % self.name_id.name
+        whatsapp_api_url = (
+            "https://web.whatsapp.com/send?phone=" + self.phone + "&text=" + msg
+        )
+
+        return {
+            "type": "ir.actions.act_url",
+            "target": "new",
+            "url": whatsapp_api_url,
+        }
