@@ -44,8 +44,9 @@
     <field name="arch" type="xml">
             <tree>
                 
-                    <field name="name"/>
-                    <field name="phone"  widget="phone"/>
+                    <!-- apply the bold Effect  -->
+                   <field name="name" decoration-bf="1" decoration-it="1"/> 
+                   <field name="phone"  widget="phone"/>
                     
                 
             </tree>

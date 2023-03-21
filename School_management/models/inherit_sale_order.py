@@ -35,5 +35,3 @@ class InheritDesc(models.Model):
         vals = super(InheritDesc, self)._prepare_analytic_account_data(prefix)
         vals["project_desc"] = self.project_desc
         return vals
-
-    

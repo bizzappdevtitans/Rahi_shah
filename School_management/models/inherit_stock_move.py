@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class stock(models.Model):
@@ -28,19 +28,23 @@ class stock(models.Model):
         proc_values["purchase_desc"] = self.sale_line_id.order_id.purchase_desc
         return proc_values
 
-    """create the get_data function to pass the value from sale_order_line to Delivery order"""
+    """create the _get_new_picking_values function to pass the value from sale_order_line to Delivery"""
 
-    def get_data(self):
+    def _get_new_picking_values(self):
+        vals = super(stock, self)._get_new_picking_values()
+
         for move in self:
-            picking = move.picking_id
-            sale_order = self.env["sale.order"].search(
-                [("procurement_group_id", "=", picking.group_id.id)], limit=1
-            )
-            for line in sale_order.order_line:
-                if line.product_id.id != move.product_id.id:
-                    continue
-                move.update(
-                    {
-                        "weight": line.weight,
-                    }
-                )
+            if not move.sale_line_id or not move.sale_line_id.product_id.weight_done:
+                continue
+            move.weight = move.sale_line_id.weight
+        return vals
+
+        """create the _action_done function to pass the value from sale_order_line to Delivery order"""
+         
+    def _action_done(self, cancel_backorder=False):
+        vals = super(stock, self)._action_done()
+        for move in self:
+            if not move.sale_line_id or not move.sale_line_id.product_id.weight_done:
+                continue
+            move.sale_line_id.weight = move.weight
+        return vals

@@ -200,7 +200,7 @@
     <field name="name">School.student.kanban</field>
     <field name="model">school.student</field>
     <field name="arch" type="xml">
-        <kanban class="o_res_partner_kanban">
+        <kanban class="o_res_partner_kanban"  default_group_by="grade">
                     <field name="sequence"/>
                     <field name="name"/>
                     <field name="Email"/>
