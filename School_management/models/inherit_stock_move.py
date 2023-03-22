@@ -40,7 +40,7 @@ class stock(models.Model):
         return vals
 
         """create the _action_done function to pass the value from sale_order_line to Delivery order"""
-         
+
     def _action_done(self, cancel_backorder=False):
         vals = super(stock, self)._action_done()
         for move in self:

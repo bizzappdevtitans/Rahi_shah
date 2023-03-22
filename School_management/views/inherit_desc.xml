@@ -46,7 +46,8 @@
 			<field name="inherit_id" ref="stock.view_picking_form"/>
 			<field name="arch" type="xml">
 				<xpath expr="//field[@name='partner_id']" position="after">
-					<field name="in_delivery_desc"/>		
+					<field name="in_delivery_desc"/>
+					<field name="invoice"/>	
 				</xpath>
 
 				</field>
@@ -134,6 +135,18 @@
 			<field name="arch" type="xml">
 			<xpath expr="//form/sheet/notebook/page/field[@name='move_ids_without_package'] /tree/field[@name='product_id']" position="after">
 					<field name="weight"/>
+				</xpath>
+
+				</field>
+			</record>
+
+		<record id="stock_picking_type_view_inherit" model="ir.ui.view">
+			<field name="name">sstock.picking.type.view.inherit.custom</field>
+			<field name="model">stock.picking.type</field>
+			<field name="inherit_id" ref="stock.view_picking_type_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='show_operations']" position="after">
+					<field name="invoice"/>
 				</xpath>
 
 				</field>
