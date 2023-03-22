@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    
+           <record id="teacher_action" model="ir.actions.act_window">
+            <field name="name">Teacher</field>
+            <field name="res_model">school.teacher</field>
+            <field name="view_mode">tree,form,kanban,graph</field>
+
+    </record> 
+
+ <!-- form view for teacher -->
+
+ <record id="teacher_management_form" model="ir.ui.view">
+    <field name="name">School.teacher.form</field>
+    <field name="model">school.teacher</field>
+    <field name="arch" type="xml">
+          <form>
+            <header>
+                <button name="%(action_create_student)d" title="Create Student" type="action"
+                    string="Create Student"/>
+
+            </header>
+            <sheet>
+                <group string="Teacher">
+                    <field name="name"/>
+                    <field name="lname"/> 
+                    <field name="phone" />
+                    <field name="photo" widget="image" width="100px" height="50px"/>
+                    <field name="timetable_ids"/> 
+                    <field name="refernce"/>
+                </group> 
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Tree view for teacher  -->
+
+ <record id="teacher_management_tree" model="ir.ui.view">
+    <field name="name">School.teacher.tree</field>
+    <field name="model">school.teacher</field>
+    <field name="arch" type="xml">
+            <tree>
+                
+                    <!-- apply the bold Effect  -->
+                   <field name="name" decoration-bf="1" decoration-it="1"/> 
+                   <field name="phone"  widget="phone"/>
+                    
+                
+            </tree>
+    </field>
+</record>
+
+<!-- Search view for Teacher -->
+
+<record id="school_teacher_search" model="ir.ui.view">
+        <field name="name">School.teacher.search</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+<!-- kanban view for teacher  -->
+
+<record id="teacher_kanban" model="ir.ui.view">
+    <field name="name">School.teacher.kanban</field>
+    <field name="model">school.teacher</field>
+    <field name="arch" type="xml">
+        <kanban class="o_res_partner_kanban">
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="photo" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                             
+                           
+
+                       <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                    </strong>
+                                <div t-if="record.phone.value">
+                                        <t t-esc="record.phone.value"/>
+                                </div>
+                                     <div t-if="record.photo.value">
+                                        <t t-esc="record.photo.value" widget="image"/>
+                                </div> 
+                            </div>
+                        </div>
+                    
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+</record>
+
+<!-- Graph view for teacher   -->
+
+
+ <record id="teacher_management_graph" model="ir.ui.view">
+    <field name="name">School.teacher.graph</field>
+    <field name="model">school.teacher</field>
+    <field name="arch" type="xml">
+          
+            <graph>
+                
+                    <field name="name"/>
+                    <field name="phone"  widget="phone"/>
+                    <field name="photo" widget="image" />
+                
+            </graph>
+    </field>
+</record>
+</odoo>
+
