@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- Root menu -->
+  <menuitem id="hotel_menu_root" 
+     name="Hotel management"
+     action="homepage_action"/>
+
+  <menuitem id="hotel_room_menu"
+        name="Room"
+        parent="hotel_menu_root" 
+      />
+    <menuitem id="room_floor_menu"
+        name="Floor"
+        parent="hotel_room_menu" 
+        action="room_floor_form_action"
+        sequence="1"
+      />
+     <menuitem id="room_type_form"
+        name="Hotel room type"
+        parent="hotel_room_menu"
+        action="hotel_room_type_form_action"
+        sequence="2"
+        />
+      <menuitem id="amenity_form"
+        name="Hotel Amenity"
+        parent="hotel_room_menu"
+        action="view_amenity"
+        sequence="3"
+        />
+
+      <menuitem id="amenity_type_form"
+        name="Hotel Amenity Types"
+        parent="hotel_room_menu"
+        action="view_amenity_types"
+        sequence="4"
+        />
+
+      <menuitem id="hotel_service_menu"
+        name="Service"
+        parent="hotel_menu_root"
+
+        />
+      <menuitem id="transport_service_menu"
+        name="Transport Service"
+        parent="hotel_service_menu"
+        action="transport_service_form_action"
+        sequence="1"
+      /> 
+      <menuitem id="laundry_service_menu"
+        name="Laundry Service"
+        parent="hotel_service_menu"
+        action="laundry_service_form_action"
+        sequence="2"
+      /> 
+      <menuitem id="laundry_service_line_menu"
+        name="Laundry Service Line"
+        parent="hotel_service_menu"
+        action="laundry_service_line_form_action"
+        sequence="3"
+      />
+      <menuitem id="food_service_menu"
+        name="food Service"
+        parent="hotel_service_menu"
+        action="food_service_form_action"
+        sequence="4"
+      />
+       <menuitem id="table_booking_menu"
+        name="Table Booking"
+        parent="hotel_service_menu"
+        action="table_booking_form_action"
+        sequence="5"
+      />
+      <menuitem id="house_keeping_menu"
+        name="House Keeping"
+        parent="hotel_service_menu"
+        action="house_keeping_form_action"
+        sequence="6"
+      />
+     <menuitem id="house_keeping_activity_menu"
+        name="House Keeping Activity"
+        parent="hotel_service_menu"
+        action="house_keeping_activity_form_action"
+        sequence="7"
+      />
+      <menuitem id="booking_menu"
+        name="Booking"
+        parent="hotel_menu_root"
+        action="table_booking_form_action"
+      />
+      <menuitem id="restaurant_booking_menu"
+        name="Restaurant Booking"
+        parent="booking_menu"
+        action="restaurant_booking_form_action"
+        sequence="1"
+      />
+      <menuitem id="room_booking_menu"
+        name="Room Reservation"
+        parent="booking_menu"
+        action="room_booking_form_action"
+        sequence="2"
+      />
+      <menuitem id="feedback_menu"
+        name="Feedback"
+        parent="hotel_menu_root"
+        action="feedback_form_action"
+      />
+</odoo>

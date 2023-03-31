@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="action_view_room_capacity_wizard" model="ir.actions.act_window">
+            <field name="name">room capacity</field>
+            <field name="res_model">room.capacity.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+
+    </record>
+
+      <record id="action_update_room_capacity" model="ir.actions.act_window">
+            <field name="name">room capacity</field>
+            <field name="res_model">room.capacity.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+
+    </record> 
+ 
+    <record id="room_capacity_view" model="ir.ui.view">
+        <field name="name">room capacityView</field>
+        <field name="model">room.capacity.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="room_ids" widget="many2many_list"/>
+                    <field name="adult"/>
+                    <field name="child"/>
+                    <field name="room_capacity" />
+                </group>
+                <footer>
+                    <button name="set_room_capacity" string="Create Room capacity" class="oe_right oe_highlight"
+                            type="object"/>
+                    <button name="update_room_capacity" string="Update Room capacity" class="oe_right oe_highlight"
+                            type="object" />
+                    <button string="Cancel" class="oe_right" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	  <record id="transport_service_form_action" model="ir.actions.act_window">
+            <field name="name">Transport</field>
+            <field name="res_model">transport.service</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+    <record id="laundry_service_form_action" model="ir.actions.act_window">
+            <field name="name">Laundry</field>
+            <field name="res_model">laundry.service</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+    <record id="laundry_service_line_form_action" model="ir.actions.act_window">
+            <field name="name">Laundry Line</field>
+            <field name="res_model">laundry.service.line</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+     <record id="food_service_form_action" model="ir.actions.act_window">
+            <field name="name">Food</field>
+            <field name="res_model">food.service</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+      <record id="table_booking_form_action" model="ir.actions.act_window">
+            <field name="name">Table</field>
+            <field name="res_model">table.booking</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+  <record id="house_keeping_form_action" model="ir.actions.act_window">
+            <field name="name">House Keeping</field>
+            <field name="res_model">house.keeping.service</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+    <record id="house_keeping_activity_form_action" model="ir.actions.act_window">
+            <field name="name">House Keeping</field>
+            <field name="res_model">house.keeping.activity</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form view of Transport service  -->
+
+    <record id="transport_service_form" model="ir.ui.view">
+    <field name="name">transport.service.form</field>
+    <field name="model">transport.service</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="action_send_whatsapp" icon="fa-whatsapp" type="object" string="Whatsapp" />
+            </header>
+            <sheet>
+                <group>
+                	<group>
+                		<field name="trans_sequence" readonly="1"/>
+                    	<field name="pick_up_date"/>
+                    	<field name="guest_name"/>
+                    </group>
+                    <group>
+                      	<field name="no_adult"/>
+                    	<field name="no_child"/>
+                        <field name="phone" widget="phone"/>
+                    </group>
+              	<notebook>
+                <page string="Picking Details" >
+             		<group>
+                        <field name="pickup_required"/>
+                        <field name="pick_up_date"/>
+                        <field name="pickup_time"/>
+                        <field name="destination"/>
+                    </group>
+                    <group>
+                    	<field name="pickup_location" />
+                    	<field name="is_chargable" readonly="1" />
+                    	<field name="Trasport_mode"/>
+                    </group>
+            	</page>
+            </notebook>
+           </group>
+          </sheet>
+        </form>
+    </field>
+</record> 
+
+<!-- Tree view of Transport service -->
+
+    <record id="transport_service_tree" model="ir.ui.view">
+    <field name="name">transport.service.tree</field>
+    <field name="model">transport.service</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="trans_sequence"/>
+            <field name="pick_up_date"/>
+            <field name="guest_name"/>
+        </tree>
+    </field>
+</record>
+
+<!-- Form view of laundry service -->
+
+    <record id="laundry_service_form" model="ir.ui.view">
+    <field name="name">laundry.service.form</field>
+    <field name="model">laundry.service</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <header>
+                    <button class="oe_stat_button" type="object" name="get_laundry_service" icon="fa-list-ul" string="Laundry">   
+                    </button>
+                    <field string="Services" name="laundry_service_count" widget="statinfo"/> 
+                </header>
+                <group>
+                <group>
+                    <field name="order_reference"/>
+                    <field name="request_date"/>
+                </group>
+                <group>
+                    <field name="shop_name"/>
+                    <field name="request_deadline"/>
+                  
+                </group>
+                <notebook>
+                <page string="Room Information">
+                 <group>
+                    <field name="guest_name"/>
+                    <field name="room_no"/>
+                 </group>
+                </page>
+                <page string="Laundry Service Product">
+                    <group>
+                        <field name="laundry_list_ids"/>
+                    </group>
+                </page>
+            </notebook>
+            </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Tree view of Laundry service -->
+
+    <record id="laundry_service_tree" model="ir.ui.view">
+    <field name="name">laundry.service.tree</field>
+    <field name="model">laundry.service</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="order_reference"/>
+            <field name="request_date"/>
+            <field name="guest_name"/>
+            <field name="shop_name"/>
+        </tree>
+    </field>
+</record>
+
+<!-- Form view of laundry service Line -->
+
+    <record id="laundry_service_line_form" model="ir.ui.view">
+    <field name="name">laundry.service.line.form</field>
+    <field name="model">laundry.service.line</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="service_name"/>
+                    <field name="cost_rate"/>
+                    <field name="qty"/>
+                    <field name="total_cost" />
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Tree view of Laundry service Line -->
+
+    <record id="laundry_service_line_tree" model="ir.ui.view">
+    <field name="name">laundry.service.line.tree</field>
+    <field name="model">laundry.service.line</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="service_name"/>
+            <field name="cost_rate"/>
+            <field name="qty"/>
+            <field name="total_cost" />
+        </tree>
+    </field>
+</record>
+
+<!-- Form view of Food service -->
+
+    <record id="food_service_form" model="ir.ui.view">
+    <field name="name">food.service.form</field>
+    <field name="model">food.service</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="food_sequence"/>
+                    <field name="item_name"/>
+                    <field name="food_qty"/>
+                    <field name="price"/>
+                    <field name="sub_total"/>
+                </group>
+                <group class="oe_subtotal_footer oe_right" colspan="2">
+                    <div class="oe_inline o_td_label">
+                        <label for="sub_total" />
+                    </div>
+
+                    <field name="sub_total" nolabel="1"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Tree view of Laundry service Line -->
+
+    <record id="lfood_service_tree" model="ir.ui.view">
+    <field name="name">food.service.tree</field>
+    <field name="model">food.service</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="item_name"/>
+            <field name="food_qty"/>
+            <field name="price"/>
+            <field name="sub_total"/>
+        </tree>
+    </field>
+</record>
+
+<!-- Form view of table Booking -->
+
+    <record id="table_booking_form" model="ir.ui.view">
+    <field name="name">table.booking.form</field>
+    <field name="model">table.booking</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="table_no"/>
+                    <field name="capacity"/>
+                    <field name="availability"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Tree view for table Booking -->
+
+ <record id="table_booking_tree" model="ir.ui.view">
+    <field name="name">table.booking.tree</field>
+    <field name="model">table.booking</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="table_no"/>
+            <field name="capacity"/>
+            <field name="availability"/>
+        </tree>
+    </field>
+</record>
+
+<!-- form view of House Keeping Service -->
+
+<record id="house_keeping_form" model="ir.ui.view">
+    <field name="name">house.keeping.service.form</field>
+    <field name="model">house.keeping.service</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <button class="oe_stat_button" type="object" name="get_house_service" icon="fa-list-ul" string="Activity"> </button>
+                <field string="Activity" name="house_keeping_count" widget="statinfo"/> 
+            </header>
+            <sheet>
+                <group>
+                  <group>
+                    <field name="room_no"/>
+                    <field name="inspect_date"/>
+                  </group>
+                  <group>
+                    <field name="clean_type"/>
+                    <field name="inspector"/>
+                </group>
+                <field name="house_keeping_ids"/>
+            </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<!-- Tree view of house keeping service -->
+
+<record id="house_keeping_tree" model="ir.ui.view">
+    <field name="name">house.keeping.service.tree</field>
+    <field name="model">house.keeping.service</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="room_no"/>
+            <field name="inspect_date"/>
+            <field name="clean_type"/>
+            <field name="inspector"/>
+        </tree>
+    </field>
+</record>
+
+<!-- form view of House Keeping Activity -->
+
+<record id="house_keeping_activity_form" model="ir.ui.view">
+    <field name="name">house.keeping.activity.form</field>
+    <field name="model">house.keeping.activity</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                  <group>
+                    <field name="house_keeping_activity"/>
+                    <field name="house_keeper"/>
+                    <field name="clean_start"/>
+                    <field name="clean_end"/>
+                    <field name="dirty"/>
+                    <field name="clean"/>
+            </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+
+<!-- Tree view of House Keeping Activity  -->
+
+<record id="house_keeping_activity_tree" model="ir.ui.view">
+    <field name="name">house.keeping.activity.tree</field>
+    <field name="model">house.keeping.activity</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="house_keeping_activity"/>
+            <field name="house_keeper"/>
+            <field name="clean_start"/>
+            <field name="clean_end"/>
+            <field name="dirty"/>
+            <field name="clean"/>
+         </tree>
+    </field>
+</record>
+</odoo>
