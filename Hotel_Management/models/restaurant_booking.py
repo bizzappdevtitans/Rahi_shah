@@ -31,7 +31,17 @@ class RestaurantBooking(models.Model):
     )
     
     def button_confirm(self):
-        self.write({"state": "confirm"})  # written the state mode for Confirm
+        self.write({"state": "confirm"})   # written the state mode for Confirm
+        message = "Confirm Successfull"    # Message notification
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "message": message,
+                "type": "success",
+                "sticky": False,
+            },
+        }  
 
     def button_cancel(self):
         self.write({"state": "cancel"})  # written the state mode for Cancel
@@ -46,6 +56,9 @@ class RestaurantBooking(models.Model):
             )
             record = super(RestaurantBooking, self).create(vals)
         return record
+
+    """create the _check_dates_times to check the booking_date
+    if user select past date and time it will generate the validation error"""
 
     @api.constrains("booking_date")
     def _check_dates_times(self):

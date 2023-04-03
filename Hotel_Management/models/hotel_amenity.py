@@ -20,7 +20,8 @@ class HotelAmenity(models.Model):
     )
     manager_id = fields.Many2one("res.users", string="Manager")
 
-
+    """Create the Hotel_Amenity type in Hotel_amenity """
+    
     @api.model
     def create(self, vals):
         if "type_id" in vals:

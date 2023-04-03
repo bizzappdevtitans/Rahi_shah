@@ -17,6 +17,7 @@ This module contains all the common features of Hotel Management.
         "report/report.xml",
         "report/room_template.xml",
         "security/ir.model.access.csv",
+        "security/hotel_security.xml",
         "wizard/Room_capacity_view_wizard.xml",
         "views/hotel_room.xml",
         "views/hotel_menu.xml",

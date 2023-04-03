@@ -21,7 +21,9 @@ class HouseKeepingactivity(models.Model):
     dirty = fields.Boolean(string="Dirty")
     clean = fields.Boolean(string="Clean")
 
-
+    """Create the _check_dates_times method to check the clean_start and clean_end 
+    if user select past date and time it will generate the Validation error """
+    
     @api.constrains("clean_start","clean_end")
     def _check_dates_times(self):
         if self.clean_start < fields.Datetime.now():

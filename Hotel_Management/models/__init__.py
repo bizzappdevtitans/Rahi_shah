@@ -13,5 +13,4 @@ from . import hotel_amenity_type
 from . import room_reservation
 from . import house_keeping_service
 from . import house_keeping_activities
-from . import account_move
 from . import feedback

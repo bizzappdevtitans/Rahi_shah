@@ -53,6 +53,9 @@ class LaundryService(models.Model):
             record = super(LaundryService, self).create(vals)
         return record
 
+    """Create the _check_dates method to check the Request_date  and request_deadline 
+    if user select past date  it will generate the Validation error """
+
     @api.constrains("request_date","request_deadline")
     def _check_dates(self):
         if self.request_date < fields.Date.today():

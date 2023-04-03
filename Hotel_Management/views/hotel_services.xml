@@ -265,11 +265,12 @@
     <field name="model">house.keeping.service</field>
     <field name="arch" type="xml">
         <form>
-            <header>
-                <button class="oe_stat_button" type="object" name="get_house_service" icon="fa-list-ul" string="Activity"> </button>
-                <field string="Activity" name="house_keeping_count" widget="statinfo"/> 
-            </header>
             <sheet>
+                <header>
+                 <button class="oe_stat_button" type="object" name="get_house_service" icon="fa-list-ul" string="Activity"> </button>
+                 <field string="Activity" name="house_keeping_count" widget="statinfo"/> 
+                </header>
+                
                 <group>
                   <group>
                     <field name="room_no"/>

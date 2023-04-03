@@ -42,6 +42,9 @@ class HouseKeepingService(models.Model):
         for record in self:
             record.house_keeping_count = len(self.house_keeping_ids)
 
+    """ create the _check_time method to check the inspect_date
+    if user select the Past date it will generate the Validation error"""        
+
     @api.constrains("inspect_date")
     def _check_time(self):
         if self.inspect_date < fields.Datetime.now():

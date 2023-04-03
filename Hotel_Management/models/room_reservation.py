@@ -25,7 +25,7 @@ class RoomReservation(models.Model):
 
     address = fields.Text(string="Address")
     email = fields.Char(string="Email")
-    phone = fields.Char(string="Contact")
+    phone = fields.Char(string="Contact",required="True")
     check_in = fields.Date(string="Check In Date")
     check_out = fields.Date(string="Check Out Date")
     stay = fields.Integer(string="Staying")
@@ -81,9 +81,17 @@ class RoomReservation(models.Model):
 
     def button_confirm(self):
         self.write(
-            {"reservation_state": "confirm"}
-        )  # written the state mode for Confirm
-
+            {"reservation_state": "confirm"})  # written the state mode for Confirm
+        message = "Booking Successfull"        # Message notification
+        return {
+            "type": "ir.actions.client",
+            "tag": "display_notification",
+            "params": {
+                "message": message,
+                "type": "success",
+                "sticky": False,
+            },
+        }  
     def button_cancel(self):
         self.write({"reservation_state": "cancel"})  # written the state mode for Cancel
 
@@ -113,7 +121,7 @@ class RoomReservation(models.Model):
                 self.stay = float_days
 
     """Create the unlink_method function if user delete the record but 
-    the  mode is Confirm  at that time UserError is occur """
+    the  mode is Confirm  at that time Validation is occur """
 
     def unlink(self):
         for reserv_rec in self:
@@ -132,6 +140,9 @@ class RoomReservation(models.Model):
             template_id = self.env.ref("Hotel_Management.room_booking_mail_template").id
             template = self.env["mail.template"].browse(template_id)
             template.send_mail(record.id, force_send=True)
+
+    """create the action_send_report method to send the mail with the Report Attachment using 
+    cron job """
 
     def action_send_report(self):
         print("send")
@@ -155,11 +166,16 @@ class RoomReservation(models.Model):
             if match == None:
                 raise ValidationError("Email id is not valid")
 
+
+    """ create the _check_dates function for check the Check In and Check Out date
+    if user select the Past Date for Chcek In then it will generate the Validation Error 
+    and aslo check the check_out date if check out date is less than check in it generate the error  """
+
     @api.constrains("check_in", "check_out")
     def _check_dates(self):
         if self.check_in >= self.check_out:
             raise ValidationError(
-                (" Check In Date Should be less than the Check Out Date!")
+                ("Check In Date Should be less than the Check Out Date!")
             )
 
         if self.check_in < fields.Date.today():
@@ -173,6 +189,10 @@ class RoomReservation(models.Model):
         retur = super(RoomReservation, self).default_get(field_list)
         retur["num_person"] = "1"
         return retur
+
+
+    """ create the phone_validation function for check the length of the phone number 
+    if user enter characters,less than or more than 10 Numbers it will generate the Validation Error"""
 
     @api.constrains("phone")
     def phone_validation(self):

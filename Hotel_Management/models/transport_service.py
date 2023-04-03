@@ -45,7 +45,7 @@ class TransportService(models.Model):
             )
             record = super(TransportService, self).create(vals)
         return record
-
+        
     """create the action_send_whatsapp function to send the message in whatsapp
     when user click on the button the message will be send """
 
@@ -64,6 +64,9 @@ class TransportService(models.Model):
             "url": whatsapp_api_url,
         }
 
+    """Create the _check_dates method to check the pick_up_date
+    if User select Past date it will generate the validation Error"""
+
     @api.constrains("pick_up_date")
     def _check_dates(self):
         if self.pick_up_date < fields.Date.today():
@@ -71,16 +74,21 @@ class TransportService(models.Model):
                 ("Pick Up date should be greater than the current date.")
             )
 
+    """Create the _check_time  method to check the pickup_time 
+    if User select Past Time it will generate the validation Error"""
+
     @api.constrains("pickup_time")
     def _check_time(self):
         if self.pickup_time < fields.Datetime.now():
             raise ValidationError(
                 ("Pick Up Time should be greater than the current Time.")
-            )  
+            )
+
+    """ create the phone_validation function for check the length of the phone number 
+    if user enter characters,less than or more than 10 Numbers it will generate the Validation Error"""
 
     @api.constrains("phone")
     def phone_validation(self):
         for record in self:
             if len(record.phone) != 10 or record.phone.isdigit() == False:
                 raise ValidationError("Phone Number is not valid")
-
