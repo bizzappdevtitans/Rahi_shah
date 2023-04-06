@@ -20,19 +20,19 @@ class HotelAmenity(models.Model):
     )
     manager_id = fields.Many2one("res.users", string="Manager")
 
-    """Create the Hotel_Amenity type in Hotel_amenity """
+    
     
     @api.model
     def create(self, vals):
+        """Create the Hotel_Amenity type in Hotel_amenity """
         if "type_id" in vals:
             prod = self.env["amenity.types"].browse(vals["type_id"])
             vals.update({"categ_id": prod.categ_id.id})
         return super(HotelAmenity, self).create(vals)
 
-    """For adding  string into name while duplicating a record"""
-
+   
     def copy(self, default=None):
-
+        """For adding  string into name while duplicating a record"""
         self.ensure_one()
         if default is None:
             default = {}

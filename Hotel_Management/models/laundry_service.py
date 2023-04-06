@@ -13,7 +13,7 @@ class LaundryService(models.Model):
     )
     request_date = fields.Date(string="Request Date")
     request_deadline = fields.Date(string="Request Deadline")
-    shop_name = fields.Many2one("res.company", string="Shop Name")
+    shop_name_id = fields.Many2one("res.company", string="Shop Name")
     room_no = fields.Char(string="Room No")
     guest_name = fields.Many2one("res.partner", string="Guest Name")
     laundry_list_ids = fields.Many2many(
@@ -53,11 +53,12 @@ class LaundryService(models.Model):
             record = super(LaundryService, self).create(vals)
         return record
 
-    """Create the _check_dates method to check the Request_date  and request_deadline 
-    if user select past date  it will generate the Validation error """
+  
 
     @api.constrains("request_date","request_deadline")
     def _check_dates(self):
+        """Create the _check_dates method to check the Request_date  and request_deadline 
+        if user select past date  it will generate the Validation error """
         if self.request_date < fields.Date.today():
             raise ValidationError(
                 ("Date should be greater than the current date.")

@@ -14,7 +14,7 @@ class RoomReservation(models.Model):
     room_booking = fields.Char(
         "Booking Reference", required=True, index=True, copy=False, default="New"
     )
-    guest_name = fields.Many2one("res.partner", string="Guest Name")
+    guest_name_id = fields.Many2one("res.partner", string="Guest Name")
     gender = fields.Selection(
         [
             ("male", "Male"),
@@ -66,9 +66,10 @@ class RoomReservation(models.Model):
             "context": "{'create': False}",
         }
 
-    # create the compute_count method to count the total Records of the smart Button
+    
 
     def compute_count(self):
+        # create the compute_count method to count the total Records of the smart Button
         for record in self:
             record.room_count = self.env[
                 "hotel.room.type"
@@ -106,11 +107,12 @@ class RoomReservation(models.Model):
             record = super(RoomReservation, self).create(vals)
         return record
 
-    """create the _compaute_days method to count the days based on check_in 
-    check_out date"""
+   
 
     @api.onchange("check_in", "check_out")
     def _compute_days(self):
+        """create the _compaute_days method to count the days based on check_in 
+        check_out date"""
         for rec in self:
             if rec.check_in and rec.check_out:
                 fmt = "%Y-%m-%d"
@@ -120,10 +122,11 @@ class RoomReservation(models.Model):
                 )
                 self.stay = float_days
 
-    """Create the unlink_method function if user delete the record but 
-    the  mode is Confirm  at that time Validation is occur """
+    
 
     def unlink(self):
+        """Create the unlink_method function if user delete the record but 
+            the  mode is Confirm  at that time Validation is occur """
         for reserv_rec in self:
             if reserv_rec.reservation_state == "confirm":
                 raise ValidationError(
@@ -131,20 +134,22 @@ class RoomReservation(models.Model):
                 )
         return super(RoomReservation, self).unlink()
 
-    """create the action_send_booking_email method to send the  mail using 
-    cron job """
+
 
     def action_send_booking_email(self):
+        """create the action_send_booking_email method to send the  mail using 
+        cron job """
         for record in self.search([]):
             today = date.today()
             template_id = self.env.ref("Hotel_Management.room_booking_mail_template").id
             template = self.env["mail.template"].browse(template_id)
             template.send_mail(record.id, force_send=True)
 
-    """create the action_send_report method to send the mail with the Report Attachment using 
-    cron job """
+   
 
     def action_send_report(self):
+        """create the action_send_report method to send the mail with the Report Attachment using 
+        cron job """
         print("send")
         template_report_id = self.env.ref(
             "Hotel_Management.room_report_mail_template"
@@ -153,11 +158,12 @@ class RoomReservation(models.Model):
             self.id, force_send=True
         )
 
-    """create the validate_mail method to validate the Mail id pattern
-    if user enter wrong mail pattern it will raise validation error """
+    
 
     @api.constrains("email")
     def validate_mail(self):
+        """create the validate_mail method to validate the Mail id pattern
+         if user enter wrong mail pattern it will raise validation error """
         if self.email:
             match = re.match(
                 "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$",
@@ -167,12 +173,13 @@ class RoomReservation(models.Model):
                 raise ValidationError("Email id is not valid")
 
 
-    """ create the _check_dates function for check the Check In and Check Out date
-    if user select the Past Date for Chcek In then it will generate the Validation Error 
-    and aslo check the check_out date if check out date is less than check in it generate the error  """
+
 
     @api.constrains("check_in", "check_out")
     def _check_dates(self):
+        """ create the _check_dates function for check the Check In and Check Out date
+        if user select the Past Date for Chcek In then it will generate the Validation Error 
+        and aslo check the check_out date if check out date is less than check in it generate the error  """
         if self.check_in >= self.check_out:
             raise ValidationError(
                 ("Check In Date Should be less than the Check Out Date!")
@@ -183,19 +190,21 @@ class RoomReservation(models.Model):
                 "check in date should be greater than the current date."
             )
 
-    """create the default_get ORM method to print the default value in the Adult field"""
+    
 
     def default_get(self, field_list=[]):  # use the Default get ORM Method
+        """create the default_get ORM method to print the default value in the Adult field"""
         retur = super(RoomReservation, self).default_get(field_list)
         retur["num_person"] = "1"
         return retur
 
 
-    """ create the phone_validation function for check the length of the phone number 
-    if user enter characters,less than or more than 10 Numbers it will generate the Validation Error"""
-
+    
     @api.constrains("phone")
     def phone_validation(self):
+        """ create the phone_validation function for check the length of the phone number 
+        if user enter characters,less than or more than 10 Numbers it will generate the Validation Error"""
+
         for record in self:
             if len(record.phone) != 10 or record.phone.isdigit() == False:
                 raise ValidationError("Phone Number is not valid")

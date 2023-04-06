@@ -10,8 +10,6 @@ class HotelRoom(models.Model):
     floor_id = fields.Many2one(
         "room.floor",
         "Floor No",
-        # help="At which floor the room is located.",
-        # ondelete="restrict",
     )
     adult = fields.Integer(string="Max Adult")
     child = fields.Integer(string="Max Chid")

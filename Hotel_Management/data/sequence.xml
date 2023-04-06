@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <!-- Generate the sequence for room type  -->
+        
+		<record id="seq_hotel_room" model="ir.sequence">
+            <field name="name">Hotel Room Type</field>
+            <field name="code">hotel.room.type</field>
+         	<field name="number_next_actual">001</field>
+            <field name="prefix">ROOM/</field>
+            <field name="padding">3</field>
+        </record>
+
+        <!-- Generate the sequence for Transport service  -->
+
+        <record id="seq_hotel_service" model="ir.sequence">
+            <field name="name">transport service</field>
+            <field name="code">transport.service</field>
+            <field name="number_next_actual">001</field>
+            <field name="prefix">TS/</field>
+            <field name="padding">3</field>
+        </record>
+
+        <!-- Generate the sequence for laundry service  -->
+
+          <record id="seq_hotel_laundry_service" model="ir.sequence">
+            <field name="name">laundry service</field>
+            <field name="code">laundry.service</field>
+            <field name="number_next_actual">001</field>
+            <field name="prefix">LDR/</field>
+            <field name="padding">3</field>
+        </record>
+
+        <!-- Generate the sequence for Food service  -->
+
+        <record id="seq_hotel_food_service" model="ir.sequence">
+            <field name="name">Food service</field>
+            <field name="code">food.service</field>
+            <field name="number_next_actual">001</field>
+            <field name="prefix">FD/</field>
+            <field name="padding">3</field>
+        </record>
+
+           <!-- Generate the sequence for Table Booking  -->
+      
+         <record id="seq_hotel_table_booking" model="ir.sequence">
+            <field name="name">Table Booking</field>
+            <field name="code">table.booking</field>
+            <field name="number_next_actual">001</field>
+            <field name="prefix">TB/</field>
+            <field name="padding">3</field>
+        </record>
+
+          <!-- Generate the sequence for Restaurant Booking  -->
+
+        <record id="seq_hotel_restaurant_booking" model="ir.sequence">
+            <field name="name">Restaurant Booking</field>
+            <field name="code">restaurant.booking</field>
+            <field name="number_next_actual">001</field>
+            <field name="prefix">RB/</field>
+            <field name="padding">3</field>
+        </record>
+
+          <!-- Generate the sequence for Room Booking  -->
+
+         <record id="seq_hotel_room_booking" model="ir.sequence">
+            <field name="name">Room Booking</field>
+            <field name="code">room.reservation</field>
+            <field name="number_next_actual">001</field>
+            <field name="prefix">BO/</field>
+            <field name="padding">3</field>
+        </record>
+    </data>
+</odoo>

@@ -6,4 +6,4 @@ class RoomFloor(models.Model):
     _rec_name = "floor_name"
 
     floor_name = fields.Char("Floor Name")
-    sequence = fields.Integer("Sequnence")
+    sequence = fields.Integer("sequence")

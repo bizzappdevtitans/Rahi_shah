@@ -13,7 +13,7 @@ class Roomcapacity(models.TransientModel):
     )
     adult = fields.Integer(string="Max Adult")
     child = fields.Integer(string="Max Chid")
-    room_capacity = fields.Integer(string="Capacity", compute="cal_total_capacity")
+    room_capacity = fields.Integer(string="Capacity", compute="_cal_total_capacity")
 
     """create the set_room_capacity function to set the value for capacity field 
     when Add the Capacity and click on button after that capacity field value is filled out"""
@@ -35,8 +35,8 @@ class Roomcapacity(models.TransientModel):
 
     """create the cal_total_capacity method to calculate the total Person for room Capacity """
 
-    @api.depends("adult", "child")
-    def cal_total_capacity(self):
+
+    def _cal_total_capacity(self):
         for res in self:
             res.update(
                 {

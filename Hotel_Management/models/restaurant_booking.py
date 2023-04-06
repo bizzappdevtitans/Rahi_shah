@@ -11,7 +11,7 @@ class RestaurantBooking(models.Model):
     booking_no = fields.Char(
         "Booking No", required=True, index=True, copy=False, default="New"
     )
-    guest_name = fields.Many2one("res.partner", string="Guest Name")
+    guest_name_id = fields.Many2one("res.partner", string="Guest Name")
     booking_date = fields.Datetime(string="Date")
     room_no = fields.Char(string="Room No")
     table_booking_list_ids = fields.Many2many("table.booking")
@@ -57,11 +57,12 @@ class RestaurantBooking(models.Model):
             record = super(RestaurantBooking, self).create(vals)
         return record
 
-    """create the _check_dates_times to check the booking_date
-    if user select past date and time it will generate the validation error"""
+   
 
     @api.constrains("booking_date")
     def _check_dates_times(self):
+        """create the _check_dates_times to check the booking_date
+        if user select past date and time it will generate the validation error"""
         if self.booking_date < fields.Datetime.now():
             raise ValidationError(
                 ("Booking Date should be greater than the current Date Time.")

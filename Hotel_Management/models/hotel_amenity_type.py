@@ -1,5 +1,5 @@
 from odoo import fields, models, api
-
+from odoo.exceptions import ValidationError
 
 class AmenityTypes(models.Model):
     _name = "amenity.types"
@@ -17,7 +17,7 @@ class AmenityTypes(models.Model):
     def unlink(self):
         rec = self.env["product.category"].sudo().browse(self.categ_id.id)
         rec.unlink()
-        return super(AmenityTypes, self).unlink()
+        return super(AmenityTypes, self).unlink() 
 
     """For adding '(copy)' string into name while duplicating a record"""
 

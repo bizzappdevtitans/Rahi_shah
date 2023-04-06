@@ -13,7 +13,7 @@ class FoodService(models.Model):
     item_name = fields.Char(string="Item Name")
     food_qty = fields.Integer(string="Quantity")
     price = fields.Float(string="Price")
-    sub_total = fields.Float(string="Subtotal", compute="cal_total_cost")
+    sub_total = fields.Float(string="Subtotal", compute="_cal_total_cost")
 
     # Generate Sequence
 
@@ -24,10 +24,9 @@ class FoodService(models.Model):
             record = super(FoodService, self).create(vals)
         return record
 
-    """create the cal_total_cost method to calculate the total price """
-
-    @api.onchange("food_qty", "price")
-    def cal_total_cost(self):
+   
+    def _cal_total_cost(self): 
+        """create the cal_total_cost method to calculate the total price """
         for res in self:
             res.update(
                 {

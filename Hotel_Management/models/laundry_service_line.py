@@ -17,11 +17,11 @@ class LaundryServiceLine(models.Model):
     )
     cost_rate=fields.Float(string="Cost Rate")
     qty=fields.Integer(string="Quantity")
-    total_cost=fields.Integer(string="Total Cost" , compute="cal_total_cost")
+    total_cost=fields.Integer(string="Total Cost" , compute="_cal_total_cost")
 
-    """create the cal_total_cost method to count the total price"""
-    @api.onchange("cost_rate", "qty")
-    def cal_total_cost(self):
+    
+    def _cal_total_cost(self):
+        """create the cal_total_cost method to count the total price"""
         for res in self:
             res.update(
                 {

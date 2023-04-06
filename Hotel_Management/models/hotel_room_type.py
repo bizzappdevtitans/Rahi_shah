@@ -34,10 +34,11 @@ class HotelRoomType(models.Model):
     description = fields.Text()
     room_capacity = fields.Integer(string="Capacity")
 
-    """Generate the sequence """
+   
 
     @api.model
     def create(self, vals):
+        """Generate the sequence """
         if vals.get("room_sequence", ("New")) == ("New"):
             vals["room_sequence"] = self.env["ir.sequence"].next_by_code(
                 "hotel.room.type"

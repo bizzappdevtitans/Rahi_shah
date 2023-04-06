@@ -36,9 +36,10 @@ class HouseKeepingService(models.Model):
             "domain": [("id", "in", self.house_keeping_ids.ids)],
             "context": "{'create': False}",
         }
-     # create the _compute_count method to count the total Records of the smart Button
-
+    
     def _compute_count(self):
+        # create the _compute_count method to count the total Records of the smart Button
+
         for record in self:
             record.house_keeping_count = len(self.house_keeping_ids)
 

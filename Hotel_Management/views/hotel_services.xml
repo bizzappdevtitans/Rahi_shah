@@ -51,7 +51,7 @@
                 	<group>
                 		<field name="trans_sequence" readonly="1"/>
                     	<field name="pick_up_date"/>
-                    	<field name="guest_name"/>
+                    	<field name="guest_name_id"/>
                     </group>
                     <group>
                       	<field name="no_adult"/>
@@ -69,7 +69,7 @@
                     <group>
                     	<field name="pickup_location" />
                     	<field name="is_chargable" readonly="1" />
-                    	<field name="Trasport_mode"/>
+                    	<field name="Transport_mode"/>
                     </group>
             	</page>
             </notebook>
@@ -88,7 +88,7 @@
         <tree>
             <field name="trans_sequence"/>
             <field name="pick_up_date"/>
-            <field name="guest_name"/>
+            <field name="guest_name_id"/>
         </tree>
     </field>
 </record>
@@ -112,7 +112,7 @@
                     <field name="request_date"/>
                 </group>
                 <group>
-                    <field name="shop_name"/>
+                    <field name="shop_name_id"/>
                     <field name="request_deadline"/>
                   
                 </group>
@@ -145,7 +145,7 @@
             <field name="order_reference"/>
             <field name="request_date"/>
             <field name="guest_name"/>
-            <field name="shop_name"/>
+            <field name="shop_name_id"/>
         </tree>
     </field>
 </record>

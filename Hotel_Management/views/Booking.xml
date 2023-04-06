@@ -37,7 +37,7 @@
             <sheet>
                 <group>
                     <field name="booking_no"/>
-                    <field name="guest_name"/>
+                    <field name="guest_name_id"/>
                     <field name="booking_date"/>
                     <field name="room_no"/>
                 </group>
@@ -66,7 +66,7 @@
     <field name="arch" type="xml">
         <tree>
                 <field name="booking_no"/>
-                <field name="guest_name"/>
+                <field name="guest_name_id"/>
                 <field name="booking_date"/>
                 <field name="room_no"/>
                 <field name="state"/>
@@ -82,7 +82,7 @@
     <field name="arch" type="xml">
         <kanban class="o_res_partner_kanban">
                 <field name="booking_no"/>
-                <field name="guest_name"/>
+                <field name="guest_name_id"/>
                 <field name="booking_date"/>
                 <field name="room_no"/>
                 <field name="state"/>
@@ -92,7 +92,7 @@
 
                        <div class="oe_kanban_details">
                                     <strong class="o_kanban_record_title">
-                                    <field name="guest_name"/>
+                                    <field name="guest_name_id"/>
                                     </strong>
                                   <div t-if="record.booking_date.value">
                                         <t t-esc="record.booking_date.value"/>
@@ -135,7 +135,7 @@
                     <group>
                   
                     <field name="room_booking"/>
-                    <field name="guest_name"/>
+                    <field name="guest_name_id"/>
                     <field name="gender"/>
                     <field name="address"/>
                     <field name="email" widget="email"/>
@@ -191,7 +191,7 @@
     <field name="arch" type="xml">
         <tree>
                 <field name="room_booking"/>
-                <field name="guest_name"/>
+                <field name="guest_name_id"/>
                 <field name="phone"/>
                 <field name="check_in"/>
                 <field name="check_out"/>
@@ -215,9 +215,9 @@
         <field name="arch" type="xml">
             <search position="inside">
                 <field name="room_booking"/>
-                <field name="guest_name"/>
+                <field name="guest_name_id"/>
                 <field name="reservation_state"/>
-                <filter string="Archived" name="guest_name" domain="[('guest_name', '=',False)]"/>
+                <filter string="Archived" name="guest_name_id" domain="[('guest_name_id', '=',False)]"/>
                  <group expand="0" string="Group By">
                     <filter string="Reservation state" name="reservation_state" context="{'group_by': 'reservation_state'}"/>
                 </group>
@@ -233,7 +233,7 @@
     <field name="arch" type="xml">
         <kanban class="o_res_partner_kanban">
                 <field name="room_booking"/>
-                <field name="guest_name"/>
+                <field name="guest_name_id"/>
                 <field name="phone"/>
                 <field name="check_in"/>
                 <field name="check_out"/>
@@ -244,7 +244,7 @@
 
                        <div class="oe_kanban_details">
                                     <strong class="o_kanban_record_title">
-                                    <field name="guest_name"/>
+                                    <field name="guest_name_id"/>
                                     </strong>
                                   <div t-if="record.check_in.value">
                                         <t t-esc="record.check_in.value"/>
@@ -271,7 +271,7 @@
         <form>
             <sheet>
                 <group>
-                    <field name="guest_name"/>
+                    <field name="guest_name_id"/>
                     <field name="rating" widget="Priority" />
                     <field name="suggestion"/>
                 </group>
@@ -287,7 +287,7 @@
     <field name="model">hotel.feedback</field>
     <field name="arch" type="xml">
         <tree>
-            <field name="guest_name"/>
+            <field name="guest_name_id"/>
             <field name="rating"/>
             <field name="suggestion"/>
         </tree>
