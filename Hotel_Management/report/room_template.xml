@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="report_reservation">
+        <t t-call="web.html_container">
+        	<t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                <div class="page">
+                	<div class="oe_structure" />
+                	  <div class="row">
+                	  <h2>
+                	  	<center>
+                	  	Room Reservation</center></h2>
+                	    <table class="table table-condensed">
+                	    	<tr>
+                	    		<td>
+                	    			<strong>Booking Reference </strong>
+                	    		</td>
+                	    		<td>
+                	    			<span t-field="o.room_booking">
+                	    		</span>
+                	    		</td>
+                	    	</tr>
+                	    	<tr>
+                	    		<td widhth="60%">
+                	    			<strong>Guest Name </strong>
+                	    		</td>
+                	    		<td>
+                	    			<span t-field="o.guest_name">
+                	    		</span>
+                	    		</td>
+                	    	</tr>
+                	    	<tr>
+                	    		<td widhth="60%">
+                	    			<strong>Check In </strong>
+                	    		</td>
+                	    		<td>
+                	    			<span t-field="o.check_in">
+                	    		</span>
+                	    		</td>
+                	    	</tr>
+                	    	<tr>
+                	    		<td widhth="60%">
+                	    			<strong>Check Out</strong>
+                	    		</td>
+                	    		<td>
+                	    			<span t-field="o.check_out">
+                	    		</span>
+                	    		</td>
+                	    	</tr>
+                	    	<tr>
+                	    		<td widhth="60%">
+                	    			<strong>Total Room</strong>
+                	    		</td>
+                	    		<td>
+                	    			<span t-field="o.room_count">
+                	    		</span>
+                	    		</td>
+                	    	</tr>
+                	    </table>
+                	    <br/>
+                	    <br/>
+                        </div>
+                </div>
+                <br/>
+                <t t-if="o.room_type_ids">
+                        <span><b>Room Details</b></span>
+                        <table class="table table-sm o_main_table" name="room" border="1" style="width:100%;">
+                                <thread>
+                                    <tr>
+                                        <th name="th_reference" class="text-left">
+                                                <span>Reference</span>
+                                        </th>
+                                        <th name="th_type" class="text-left">
+                                                <span>Room Type</span>
+                                        </th>
+                                        <th name="th_reference" class="text-left">
+                                                <span>Price</span>
+                                        </th>
+                                        <th name="th_reference" class="text-left">
+                                                <span>Capacity</span>
+                                        </th>
+                                </tr>
+                        </thread>
+                                <t t-foreach="o.room_type_ids" t-as="room">
+                                        <tr>
+                                        <td>
+                                                <span t-field="room.room_sequence" />
+                                        </td>
+                                        <td>
+                                                <span t-field="room.room_type" />
+                                        </td >
+
+                                        <td>
+                                                <span t-field="room.room_price" />
+                                        </td>
+                                        <td>
+                                                <span t-field="room.room_capacity"/>
+                                        </td>
+                                </tr>
+                        </t>
+                </table>
+        </t>
+
+
+
+
+        </t>
+</t>
+</t>
+</template>
+</odoo>

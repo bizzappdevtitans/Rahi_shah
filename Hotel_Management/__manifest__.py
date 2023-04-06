@@ -1,0 +1,31 @@
+{
+    "name": "Hotel Management",
+    "version": "15.0.1.0.0",
+    "category": "Management/Management",
+    "summary": "Hotel Management",
+    "author": "BizzAppDev",
+    "description": """
+This module contains all the common features of Hotel Management.
+    """,
+    "depends": ["base","product","mail","account","sale","stock"],
+    "data": [
+        "data/sequence.xml",
+        "data/server_action.xml",
+        "data/cron.xml",
+        "data/Email_template.xml",
+        "data/report_send_mail_template.xml",
+        "report/report.xml",
+        "report/room_template.xml",
+        "security/ir.model.access.csv",
+        "security/hotel_security.xml",
+        "wizard/Room_capacity_view_wizard.xml",
+        "views/hotel_room.xml",
+        "views/hotel_menu.xml",
+        "views/hotel_services.xml",
+        "views/Booking.xml",
+        "views/hotel_amenity.xml",
+    ],
+    "installable":True,
+    "auto_install":False,
+    "license": "LGPL-3",
+}

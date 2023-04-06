@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="room_floor_form_action" model="ir.actions.act_window">
+            <field name="name">Floor</field>
+            <field name="res_model">room.floor</field>
+            <field name="view_mode">tree,form</field>
+    </record> 
+
+    <record id="hotel_room_type_form_action" model="ir.actions.act_window">
+            <field name="name">Hotel Room Type</field>
+            <field name="res_model">hotel.room.type</field>
+            <field name="view_mode">tree,form,search,graph,kanban</field>
+    </record> 
+
+      <record id="homepage_action" model="ir.actions.act_window">
+            <field name="name">HomePage</field>
+            <field name="res_model">homepage</field>
+            <field name="target">inline</field>
+            <field name="view_mode">form</field>
+
+    </record>
+
+    <!-- Form view of Room floor  -->
+
+    <record id="Hotel_room_floor_form" model="ir.ui.view">
+    <field name="name">Hotel.room.floor.form</field>
+    <field name="model">room.floor</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="floor_name" />
+                    <field name="sequence"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+    <!-- Tree view of Room Floor -->
+
+    <record id="Hotel_room_floor_tree" model="ir.ui.view">
+    <field name="name">Hotel.room.floor_tree</field>
+    <field name="model">room.floor</field>
+    <field name="arch" type="xml">
+          
+            <tree>
+                  <field name="floor_name"/>
+                  <field name="sequence"/>   
+            </tree>
+    </field>
+</record>
+
+
+<!--form view   Hotel Room type  -->
+
+ <record id="Hotel_room_type_form" model="ir.ui.view">
+    <field name="name">Hotel.room.type.form</field>
+    <field name="model">hotel.room.type</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <button name="%(action_view_room_capacity_wizard)d" title="Create Room capacity" type="action"
+                    string="Create Room capacity" style="background:lightblue"/>
+               
+            </header>
+            <sheet>
+                <group>
+                    <field name="room_sequence"  readonly="1"/>
+                    <field name="floor_id"/>
+                    <field name="room_type"/>
+                    <field name="room_price"/>
+                    <field name="room_status"/>
+                    <field name="room_photo" widget="image" width="90px" />
+                </group>
+                   <notebook>
+                    <page string="Description">
+                        <field name="description"/>
+                    </page>
+                </notebook>
+            </sheet>
+                 <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
+
+<!-- Tree view of room type -->
+
+<record id="Hotel_room_type_tree" model="ir.ui.view">
+    <field name="name">Hotel.room.type.tree</field>
+    <field name="model">hotel.room.type</field>
+    <field name="arch" type="xml">
+        <tree>
+                    <field name="room_sequence"  readonly="1"/>
+                    <field name="floor_id"/>
+                    <field name="room_type"/>
+                    <field name="room_price"/>
+                    <field name="room_status"/>
+                    <field name="room_capacity"/>
+        </tree>
+    </field>
+</record>
+
+
+<!-- kanban view for Room Type  -->
+
+<record id="Room_kanban" model="ir.ui.view">
+    <field name="name">Hotel.room.type.kanban</field>
+    <field name="model">hotel.room.type</field>
+    <field name="arch" type="xml">
+        <kanban class="o_res_partner_kanban">
+               <field name="room_sequence"  readonly="1"/>
+                    <field name="floor_id"/>
+                    <field name="room_type"/>
+                    <field name="room_price"/>
+                    <field name="room_status"/>
+                    <field name="room_capacity"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click"> 
+
+                       <div class="oe_kanban_details">
+                                    <strong class="o_kanban_record_title">
+                                    <field name="room_type"/>
+                                    </strong>
+                                  <div t-if="record.room_price.value">
+                                        <t t-esc="record.room_price.value"/>
+                                </div>
+                                <div t-if="record.room_status.value">
+                                        <t t-esc="record.room_status.value"/>
+                                </div>
+                                 <div t-if="record.room_capacity.value">
+                                        <t t-esc="record.room_capacity.value"/>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </t>
+                </templates>
+           
+            </kanban>
+         </field>
+</record>
+
+<!-- Search view of room type -->
+
+<record id="Hotel_room_type_search" model="ir.ui.view">
+        <field name="name">Hotel.room.type.search</field>
+        <field name="model">hotel.room.type</field>
+        <field name="arch" type="xml">
+            <search position="inside">
+                <field name="floor_id"/>
+                <field name="room_type"/>
+                <field name="room_status"/>
+                <filter string="Archived" name="floor_id" domain="[('floor_id', '=',False)]"/>
+                 <group expand="0" string="Group By">
+                    <filter string="Room Type" name="room_type" context="{'group_by': 'room_type'}"/>
+                </group>
+                <searchpanel>
+                    <field name="room_type" enable_counters="1"/>
+                    <field name="floor_id" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <!-- Graph view of Room type -->
+
+     <record id="room_graph" model="ir.ui.view">
+            <field name="name">hotel.room.type.graph</field>
+            <field name="model">hotel.room.type</field>
+            <field name="arch" type="xml">
+                <graph string="Rooms">
+                    <field name="room_price"/>
+                </graph>
+            </field>
+        </record>
+
+
+    <!-- Home page -->
+
+    <record id="hotel_homepage_form" model="ir.ui.view">
+        <field name="name">homepage.form</field>
+        <field name="model">homepage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div class="text-center">
+                            <img src="/Hotel_Management/static/description/Hotel-Management-System.png/" alt="Home" widget="image" readonly="1"
+                             style="width:90%; height:20%"/>  
+                </div>
+            </group>
+        </sheet>
+    </form>
+</field>
+</record>
+
+</odoo>
