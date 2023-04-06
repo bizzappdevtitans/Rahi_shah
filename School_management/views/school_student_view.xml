@@ -289,7 +289,7 @@
  
 <!-- Assign Assignment form -->
 
-        <record id="school_assign_form" model="ir.ui.view">
+        <!-- <record id="school_assign_form" model="ir.ui.view">
             <field name="name">school.assignmnent.form</field>
             <field name="model">school.assignmnent</field>
             <field name="arch" type="xml">
@@ -312,7 +312,7 @@
             </sheet>
         </form>
     </field>
-</record>
+</record>  -->
 
 <!-- Tree view for Assign Assignment  -->
 

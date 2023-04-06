@@ -7,7 +7,7 @@
     "description": """
 This module contains all the common features of School Management.
     """,
-    "depends": ["mail","sale"],
+    "depends": ["mail","sale","stock","purchase"],
     "data": [
         "Data/seq.xml",
         "Data/server_action.xml",

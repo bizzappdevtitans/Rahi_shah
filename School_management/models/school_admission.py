@@ -85,7 +85,7 @@ class SchoolAdmission(models.Model):
             if record.birthday > fields.Date.today():
                 raise ValidationError("The BirthDate cannot be set in the Future")
 
-    """ create the phone_validate function for check the length of the phon number
+    """ create the phone_validate function for check the length of the phone number
     if user enter less than or more than 10 Numbers it will generate the Validation Error"""
 
     @api.constrains("phone")  # use the constrains method decorators
