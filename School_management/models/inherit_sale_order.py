@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class InheritDesc(models.Model):
@@ -22,6 +22,11 @@ class InheritDesc(models.Model):
 
     Manufacturing_desc = fields.Char(string="Manufacturing")
 
+    display_delivery_address = fields.Boolean(
+        "Display Address", related="partner_id.display_delivery_address", store=True
+    )
+
+
     """create the _prepare_invoice function to pass the value from sale_order to Regular Invoivce"""
 
     def _prepare_invoice(self):
@@ -35,6 +40,3 @@ class InheritDesc(models.Model):
         vals = super(InheritDesc, self)._prepare_analytic_account_data(prefix)
         vals["project_desc"] = self.project_desc
         return vals
-
-    
-

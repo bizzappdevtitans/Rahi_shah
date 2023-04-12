@@ -36,6 +36,9 @@
 				<xpath expr="//notebook/page/field[@name='order_line'] /tree/field[@name='weight_done']" position="after">
 					<field name="weight"/>
 				</xpath>
+		   	<xpath expr="//field[@name='partner_shipping_id']" position="after">
+					<field name="display_delivery_address"/>		
+				</xpath> 
 
 			</field>
 		</record>
@@ -66,17 +69,17 @@
 				</field>
 			</record>
 
-	<record id="project_project_extend" model="ir.ui.view">
-        <field name="name">project.project.extended</field>
-        <field name="model">project.project</field>
-        <field name="inherit_id" ref="project.edit_project"/>
-        <field name="arch" type="xml">
-            <field name="user_id" position="after">
-                <field name="project_desc"/>
-            </field>
-        </field>
-    </record>        
 
+		<record id="project_project_extend" model="ir.ui.view">
+    	    <field name="name">project.project.extended</field>
+        	<field name="model">project.project</field>
+        	<field name="inherit_id" ref="project.edit_project"/>
+        	<field name="arch" type="xml">
+            	<field name="user_id" position="after">
+                	<field name="project_desc"/>
+            	</field>
+        	</field>
+    	</record>        
 
 		<record id="task_view_inherit" model="ir.ui.view">
 			<field name="name">project.task.view.inherit.custom</field>
@@ -171,7 +174,20 @@
 			</xpath> 
 			</field>
 			</record>
-</data>
+
+
+		<record id="res_partner_view_inherit" model="ir.ui.view">
+			<field name="name">res.partner.view.inherit.custom</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='vat']" position="after">
+					<field name="display_delivery_address"/>
+				</xpath>
+
+				</field>
+			</record>
+	</data>
 </odoo>
 
 
