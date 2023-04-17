@@ -17,11 +17,13 @@ class SchoolLeave(models.Model):
             ("full", "FullLeave"),
         ]
     )
-    """ create the _check_date function for check the Date of Leave
-    if Teacher select the past Date for Leave then it will generate the Validation Error """
     
     @api.constrains("date")  #use constrains Method Decoratos
     def _check_date(self):
+        
+        """ create the _check_date function for check the Date of Leave
+        if Teacher select the past Date for Leave then it will generate the Validation Error """
+    
         for record in self:
             if record.date < fields.Date.today():
                 raise ValidationError("The Leave date cannot be set in the Past")

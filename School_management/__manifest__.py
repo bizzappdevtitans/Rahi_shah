@@ -23,6 +23,7 @@ This module contains all the common features of School Management.
         "views/school_menu.xml",
         "views/school_teacher_view.xml",
         "views/school_submit_assignment_view.xml",
+        "report/inherit_report_stockpicking_operations.xml"
         
     ],
     "license": "LGPL-3",

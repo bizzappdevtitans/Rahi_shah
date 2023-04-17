@@ -26,18 +26,26 @@ class schoolBookIssue(models.Model):
     issue_date = fields.Date(string="Book Issue Date")
     return_date = fields.Date(string="Book Return Date")
 
-    """ create the _check_date function for check the book Issue date
-    if user select the Past Date for issue date then it will generate the Validation Error """
-
     @api.constrains("issue_date")  # use the Constrains method decorators
     def _check_date(self):
+
+        """create the _check_date function for check the book Issue date
+        if user select the Past Date for issue date then it will generate the Validation Error"""
+
         for record in self:
             if record.issue_date < fields.Date.today():
                 raise ValidationError("The Issue date cannot be set in the Past")
 
-    """Create the action_notification function to display the notification message
-    when user click on the button"""
+    @api.constrains("book_name")
+    def validate_bookname(self):
+        for rec in self:
+            if rec.book_name.isalpha() == False:
+                raise ValidationError("Book Name is not valid")
+
     def action_notification(self):
+        """Create the action_notification function to display the notification message
+        when user click on the button"""
+
         message = "Button click Successfull"
         return {
             "type": "ir.actions.client",

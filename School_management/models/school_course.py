@@ -36,9 +36,8 @@ class Schoolcourse(models.Model):
             "context": "{'create': False}",
         }
 
-    """create the compute_count function to count the Records in the Smart Number"""
-
     def compute_count(self):
+        """create the compute_count function to count the Records in the Smart Number"""
         for record in self:
             record.teacher_count = self.env[
                 "school.teacher"

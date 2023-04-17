@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="inherit_report_picking" inherit_id="stock.report_picking">
+		<xpath expr="//div[@class='row mt48 mb32']" position="after"> 
+				<div class="row mt48 mb32">
+                    <strong>Report Print Time:</strong>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%b-%Y,%H:%M:%S')" /> 
+                </div>
+        </xpath>
+	</template>
+</odoo>

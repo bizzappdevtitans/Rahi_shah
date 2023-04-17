@@ -6,18 +6,20 @@ class Partner(models.Model):
 
     display_delivery_address=fields.Boolean("Display Address",store=True)
 
-    @api.onchange("display_delivery_address")
-    def selection_change(self):
-        for record in self:
-            if record.display_delivery_address == True:
-                record.type = 'delivery'
-            else:
-                record.type = 'contact'
+    # @api.onchange("display_delivery_address")
+    # def selection_change(self):
+    #     for record in self:
+    #         if record.display_delivery_address == True:
+    #             record.type = 'delivery'
+    #         else:
+    #             record.type = 'contact'
 
-    @api.onchange("type")
-    def selection_ch(self):
-        for record in self:
-            if record.type == 'delivery':
-                record.display_delivery_address = True
-            else:
-                record.display_delivery_address = False
+    # @api.onchange("type")
+    # def selection_ch(self):
+    #     for record in self:
+    #         if record.type == 'delivery':
+    #             record.display_delivery_address = True
+    #         else:
+    #             record.display_delivery_address = False
+
+    

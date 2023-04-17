@@ -13,11 +13,13 @@ class schoolExam(models.Model):
     day = fields.Char(string="Day of Exam")
     subject = fields.Char(string="Subject")
 
-    """ create the _check_date function for check the Date of Exam
-    if Admin select the past Date for Exam then it will generate the Validation Error """
 
     @api.constrains("date")
     def _check_date(self):
+
+        """ create the _check_date function for check the Date of Exam
+        if Admin select the past Date for Exam then it will generate the Validation Error """
+        
         for record in self:
             if record.date < fields.Date.today():
                 raise ValidationError("The Exam Date cannot be set in the Past")

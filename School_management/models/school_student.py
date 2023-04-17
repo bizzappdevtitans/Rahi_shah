@@ -79,19 +79,30 @@ class SchoolStudent(models.Model):
         if self.name == "zaid":
             raise UserError(("You cannot delete...."))
 
-    """ create the phone_validate function for check the length of the phon number
-    if user enter less than or more than 10 Numbers it will generate the Validation Error"""
+    
 
     @api.constrains("phone")  # use the constrains method decorators
     def phone_validation(self):
+
+        """ create the phone_validate function for check the length of the phon number
+        if user enter less than or more than 10 Numbers it will generate the Validation Error"""
+
         for record in self:
-            if len(record.phone) != 10:
+            if len(record.phone) != 10 or record.phone.isdigit() == False:
                 raise ValidationError("Phone Number is not valid")
 
-    """ Create the validate_mail function for validate the User eamil id pattern """
+    @api.constrains("name")
+    def validate_name(self):
+        for rec in self:
+            if rec.name.isalpha()==False :
+                raise ValidationError("Name is not valid")
+
+   
 
     @api.constrains("Email")
+
     def validate_mail(self):
+        """ Create the validate_mail function for validate the User eamil id pattern """
         if self.Email:
             match = re.match(
                 "^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$",
@@ -129,12 +140,14 @@ class SchoolStudent(models.Model):
             name, args=args, operator=operator, limit=limit, name_get_uid=name_get_uid
         )
 
-    """create the _cron_send_birthday method for print the birthday message,
-    DOB compare with today's date if the date is match it will print the birthday message 
-    this method link with cron job """
 
     @api.model
     def _cron_send_birthday(self):
+
+        """create the _cron_send_birthday method for print the birthday message,
+        DOB compare with today's date if the date is match it will print the birthday message 
+        this method link with cron job """
+
         print("birthday")
         if self.env["school.student"].search([("birth", "=", fields.Date.today())]):
             self.env["school.student"].search(
@@ -146,11 +159,14 @@ class SchoolStudent(models.Model):
                 [("birth", "!=", fields.Date.today())]
             ).write({"birthday_wish": "later"})
 
-    """create the action_send_birthday_email method to send the birthday mail using 
-    cron job """
+    
 
     def action_send_birthday_email(self):
         for record in self.search([]):
+            
+            """create the action_send_birthday_email method to send the birthday mail using 
+            cron job """
+
             today = date.today()
             print(today)
             if today.day == record.birth.day and today.month == record.birth.month:

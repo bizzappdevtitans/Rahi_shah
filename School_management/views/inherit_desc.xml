@@ -36,7 +36,7 @@
 				<xpath expr="//notebook/page/field[@name='order_line'] /tree/field[@name='weight_done']" position="after">
 					<field name="weight"/>
 				</xpath>
-		   	<xpath expr="//field[@name='partner_shipping_id']" position="after">
+		   		<xpath expr="//field[@name='partner_shipping_id']" position="after">
 					<field name="display_delivery_address"/>		
 				</xpath> 
 

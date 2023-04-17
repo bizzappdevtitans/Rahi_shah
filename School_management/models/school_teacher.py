@@ -24,7 +24,7 @@ class SchoolTeacher(models.Model):
     @api.constrains("phone")
     def phone_validation(self):
         for record in self:
-            if len(record.phone) != 10:
+            if len(record.phone) != 10 or record.phone.isdigit() == False:
                 raise ValidationError("Phone Number is not valid")
 
     # create Name_Get ORM Method To Append the First name and last name of teacher

@@ -28,11 +28,12 @@ class SchoolResult(models.Model):
     )
     grade = fields.Char("Grade")
 
-    """Create the cal_marks function to calculate the total Marks
-    if Teacher change the Marks  of the student then the total Marks is also change """
+    
 
     @api.depends("Eco", "ba", "acc", "state", "Gujrati")
     def cal_marks(self):
+        """Create the cal_marks function to calculate the total Marks
+        if Teacher change the Marks  of the student then the total Marks is also change """
         for res in self:
             res.update(
                 {
@@ -40,9 +41,10 @@ class SchoolResult(models.Model):
                 }
             )
 
-    """ create the cal_perce function to calculate the percentage """
-
+    
     def cal_perce(self):
+        """ create the cal_perce function to calculate the percentage """
+
         for res in self:
             res.update(
                 {
@@ -56,11 +58,12 @@ class SchoolResult(models.Model):
         ("roll_unique", "unique(roll)", "Roll number Must be  is unique..."),
     ]
 
-    """Create the _check_marks function for Checking the Marks is not greater than 100 
-    if Teacher Enter the mopre than 100 it will generate the Validation Error"""
+    
 
     @api.constrains("Eco", "ba", "acc", "state", "Gujrati")
     def _check_marks(self):
+        """Create the _check_marks function for Checking the Marks is not greater than 100 
+        if Teacher Enter the mopre than 100 it will generate the Validation Error"""
         for rec in self:
             if (
                 rec.Eco > 100

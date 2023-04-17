@@ -62,10 +62,10 @@ class StudentSubmit(models.Model):
                 [("deadline_date", ">=", fields.Date.today())]
             ).write({"assin_message": "submit"})
 
-    """Create the _unlink_except_done function if user delete the record but 
-    it's mode is done at that time UserError is occur """
-
     @api.ondelete(at_uninstall=False)  # Use the Ondelete Method Decorators
     def _unlink_except_done(self):
+        """Create the _unlink_except_done function if user delete the record but 
+        it's mode is done at that time UserError is occur """
+
         if (state == "confirm" for state in self):
             raise UserError(("You cannot delete,it's in Confirm Mode....."))

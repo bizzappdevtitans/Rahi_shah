@@ -25,11 +25,12 @@ class StudentAttendance(models.Model):
         ]
     )
 
-    """create the _check_date function for check the Date of Attendance
-    if Admin select the Future Date for Attendance then it will generate the Validation Error """
-
     @api.constrains("date")
     def _check_date(self):
+
+        """create the _check_date function for check the Date of Attendance
+        if Admin select the Future Date for Attendance then it will generate the Validation Error """
+        
         for record in self:
             if record.date > fields.Date.today():
                 raise ValidationError("The Attendance Date cannot be set in the Future")
